@@ -1099,56 +1099,54 @@
         document.getElementById('previewRooms').innerHTML = preview.join(', ');
     }
 
-    window.addNewRoom = async function(event) {
-        event.preventDefault();
-        
-        const wardId = document.getElementById('addRoomWard').value;
-        const format = document.getElementById('roomNumberFormat').value;
-        const numberOfRooms = parseInt(document.getElementById('numberOfRooms').value);
-        
-        if (!wardId || !format || !numberOfRooms) {
-            showToast('Please fill all fields');
-            return;
+window.addNewRoom = async function(event) {
+    event.preventDefault();
+    
+    const wardId = document.getElementById('addRoomWard').value;
+    const format = document.getElementById('roomNumberFormat').value;
+    const numberOfRooms = parseInt(document.getElementById('numberOfRooms').value);
+    
+    if (!wardId || !format || !numberOfRooms) {
+        showToast('Please fill all fields');
+        return;
+    }
+    
+    const wardIndex = wards.findIndex(w => w.id === wardId);
+    if (wardIndex === -1) return;
+    
+    const ward = wards[wardIndex];
+    const existingRooms = ward.rooms || [];
+    const newRooms = [];
+    const addedRooms = [];
+    
+    for (let i = 1; i <= numberOfRooms; i++) {
+        let newRoom = format + i;
+        if (!existingRooms.includes(newRoom)) {
+            newRooms.push(newRoom);
+            addedRooms.push(newRoom);
         }
-        
-        const wardIndex = wards.findIndex(w => w.id === wardId);
-        if (wardIndex === -1) return;
-        
-        const ward = wards[wardIndex];
-        const existingRooms = ward.rooms || [];
-        const newRooms = [];
-        const addedRooms = [];
-        
-        for (let i = 1; i <= numberOfRooms; i++) {
-            let newRoom = format + i;
-            if (!existingRooms.includes(newRoom)) {
-                newRooms.push(newRoom);
-                addedRooms.push(newRoom);
-            }
-        }
-        
-        if (newRooms.length === 0) {
-            showToast('No new rooms were added (they might already exist)');
-            return;
-        }
-        
-        const updatedRooms = [...existingRooms, ...newRooms];
-        
-        // Update in Firestore
-        const wardRef = doc(db, "wards", ward.id);
-        await updateDoc(wardRef, {
-            rooms: updatedRooms,
-            totalBeds: updatedRooms.length
-        });
-        
-        // Update local array
-        wards[wardIndex].rooms = updatedRooms;
-        wards[wardIndex].totalBeds = updatedRooms.length;
-        
-        closeAddRoomModal();
-        await loadData();
-        showToast(`✅ Added ${addedRooms.length} room(s) to ${ward.name} Ward: ${addedRooms.join(', ')}`);
-    };
+    }
+    
+    if (newRooms.length === 0) {
+        showToast('No new rooms were added (they might already exist)');
+        return;
+    }
+    
+    const updatedRooms = [...existingRooms, ...newRooms];
+    
+    const wardRef = doc(db, "wards", ward.id);
+    await updateDoc(wardRef, {
+        rooms: updatedRooms,
+        totalBeds: updatedRooms.length
+    });
+    
+    wards[wardIndex].rooms = updatedRooms;
+    wards[wardIndex].totalBeds = updatedRooms.length;
+    
+    closeAddRoomModal();
+    await loadData();
+    showToast(`✅ Added ${addedRooms.length} room(s) to ${ward.name} Ward: ${addedRooms.join(', ')}`);
+};
 
     window.updateAvailableRooms = function() {
         const wardId = document.getElementById('admitWard').value;
@@ -1425,7 +1423,7 @@
     window.navigateTo = navigateTo;
     window.showAddRoomModal = showAddRoomModal;
     window.closeAddRoomModal = closeAddRoomModal;
-    window.addNewRoom = addNewRoom;
-</script>
+window.addNewRoom = addNewRoom;
+window.updateRoomPreview = updateRoomPreview;</script>
 </body>
 </html>
