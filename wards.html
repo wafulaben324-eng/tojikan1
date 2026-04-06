@@ -747,17 +747,12 @@
 </div>
 
 <main class="container">
-    <div class="page-header">
-        <h1><i class="fas fa-procedures"></i> Ward Management</h1>
-        <div class="header-buttons">
-            <button class="btn-add-room" onclick="showAddRoomModal()">
-                <i class="fas fa-plus-circle"></i> Add Room
-            </button>
-            <button class="btn-primary" onclick="showAdmitPatientModal()">
-                <i class="fas fa-user-plus"></i> Admit Patient
-            </button>
-        </div>
-    </div>
+<div class="page-header">
+    <h1><i class="fas fa-procedures"></i> Ward Management</h1>
+    <button class="btn-primary" onclick="showAdmitPatientModal()">
+        <i class="fas fa-user-plus"></i> Admit Patient
+    </button>
+</div>
 
     <div class="ward-summary" id="wardSummary">
         <div class="summary-item"><div class="value" id="totalBeds">0</div><div class="label">Total Beds</div></div>
@@ -768,47 +763,6 @@
 
     <div class="ward-grid" id="wardGrid"></div>
 </main>
-
-<!-- Add Room Modal -->
-<div class="modal" id="addRoomModal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2><i class="fas fa-plus-circle"></i> Add New Room</h2>
-            <button class="close-btn" onclick="closeAddRoomModal()">&times;</button>
-        </div>
-        <form id="addRoomForm" onsubmit="addNewRoom(event)">
-            <div class="form-grid">
-                <div class="form-group full-width">
-                    <label>Select Ward *</label>
-                    <select id="addRoomWard" required>
-                        <option value="">-- Choose ward --</option>
-                        <option value="newborn">New Born Ward</option>
-                        <option value="middle">Middle Age Ward</option>
-                        <option value="old">Old Age Ward</option>
-                    </select>
-                </div>
-                <div class="form-group full-width">
-                    <label>Room Number Format *</label>
-                    <input type="text" id="roomNumberFormat" placeholder="e.g., A, 101, 201" required>
-                    <small style="color: #666;">Enter the starting letter/number (e.g., 'A' will create A1, A2, or '101' will create 101, 102)</small>
-                </div>
-                <div class="form-group full-width">
-                    <label>Number of Rooms to Add *</label>
-                    <input type="number" id="numberOfRooms" min="1" max="20" value="1" required>
-                </div>
-                <div class="form-group full-width">
-                    <div id="roomPreview" style="background: #f8f9fa; padding: 1rem; border-radius: 12px; margin-top: 0.5rem;">
-                        <strong>Preview:</strong> <span id="previewRooms">-</span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-actions">
-                <button type="button" class="btn-secondary" onclick="closeAddRoomModal()">Cancel</button>
-                <button type="submit" class="btn-primary">Add Room(s)</button>
-            </div>
-        </form>
-    </div>
-</div>
 
 <!-- Admit Patient Modal -->
 <div class="modal" id="admitModal">
@@ -1421,9 +1375,7 @@ window.addNewRoom = async function(event) {
     window.toggleProfileMenu = toggleProfileMenu;
     window.logoutUser = logoutUser;
     window.navigateTo = navigateTo;
-    window.showAddRoomModal = showAddRoomModal;
-    window.closeAddRoomModal = closeAddRoomModal;
-window.addNewRoom = addNewRoom;
-window.updateRoomPreview = updateRoomPreview;</script>
+window.updateRoomPreview = updateRoomPreview;
+</script>
 </body>
 </html>
