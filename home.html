@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>TOJI-KAN Private Hospital | Live Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f7fc;
+            color: #1e2a3e;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            cursor: pointer;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: #2c6e9e;
+            margin-right: 6px;
+        }
+
+        .nav-center {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
+        }
+
+        .search-bar {
+            background: #f1f5f9;
+            border-radius: 40px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .search-bar:hover {
+            background: #e6edf4;
+        }
+
+        .search-bar i {
+            color: #5a6e85;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-icon {
+            width: 42px;
+            height: 42px;
+            background: #f0f4fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav-icon:hover {
+            background: #e2e8f0;
+        }
+
+        /* Profile menu */
+        .profile-menu {
+            position: absolute;
+            top: 75px;
+            right: 2rem;
+            background: white;
+            width: 280px;
+            border-radius: 20px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            padding: 1rem;
+            display: none;
+            z-index: 200;
+        }
+
+        .profile-menu.show {
+            display: block;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .profile-header i {
+            font-size: 2.5rem;
+            color: #2c6e9e;
+        }
+
+        .profile-name {
+            font-weight: 700;
+        }
+
+        .profile-email {
+            font-size: 0.75rem;
+            color: #5f7f9e;
+        }
+
+        .profile-menu-items a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 8px;
+            color: #1e2a3e;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: 0.1s;
+            cursor: pointer;
+        }
+
+        .profile-menu-items a:hover {
+            background: #f0f6fe;
+        }
+
+        .divider {
+            height: 1px;
+            background: #edf2f7;
+            margin: 8px 0;
+        }
+
+        /* Main Tabs */
+        .main-tabs {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 2rem;
+        }
+
+        .tabs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 1rem 0;
+            font-weight: 500;
+            color: #5a6e85;
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            color: #1e5b9e;
+            border-bottom-color: #1e5b9e;
+        }
+
+        .tab:hover:not(.active) {
+            color: #2c3e66;
+            border-bottom-color: #cbd5e1;
+        }
+
+        /* container */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            transition: all 0.2s;
+            border: 1px solid #eef2f9;
+        }
+
+        .stat-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+
+        .blue { background: #eef3ff; color: #2c6e9e; }
+        .green { background: #e6f9ef; color: #2b7a4b; }
+        .orange { background: #fff3e0; color: #d97706; }
+        .purple { background: #f0eaff; color: #7c3aed; }
+
+        .stat-info h3 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #5c6f87;
+            margin-bottom: 5px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0f2b3d;
+        }
+
+        .stat-change {
+            font-size: 0.7rem;
+            color: #66809c;
+        }
+
+        .positive {
+            color: #2b7a4b;
+        }
+
+        /* Quick actions */
+        .quick-actions {
+            background: white;
+            border-radius: 28px;
+            padding: 1.2rem 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid #eef2f9;
+        }
+
+        .quick-actions h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .action-btn:hover {
+            background: #e2eaf3;
+            transform: translateY(-2px);
+        }
+
+        /* dashboard grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.2rem 1.2rem 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #eef2f9;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #ecf3f9;
+        }
+
+        .card-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .view-all {
+            font-size: 0.75rem;
+            text-decoration: none;
+            color: #2c6e9e;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .recent-list, .schedule-list, .ward-list, .bill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .patient-item, .schedule-item, .ward-item, .bill-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f4fa;
+        }
+
+        .patient-info h4, .schedule-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .patient-info p, .schedule-info p {
+            font-size: 0.7rem;
+            color: #6a7f9b;
+        }
+
+        .badge {
+            background: #eef2ff;
+            padding: 4px 8px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .status-pending { background: #fff3e0; color: #b45309; }
+        .status-confirmed { background: #e0f2fe; color: #0369a1; }
+        .status-paid { background: #e0f2fe; color: #0369a1; }
+        .status-unpaid { background: #fff3e0; color: #b45309; }
+
+        .ward-progress {
+            width: 100px;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .ward-fill {
+            height: 100%;
+            background: #2c6e9e;
+            border-radius: 10px;
+        }
+
+        .loading-skeleton {
+            color: #94a3b8;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* toast */
+        .toast-msg {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #1e293b;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            z-index: 1000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: 0.2s;
+            pointer-events: none;
+        }
+
+        @media (max-width: 700px) {
+            .nav-container { padding: 0 0.5rem; }
+            .tabs-container { gap: 1rem; }
+            .container { padding: 0 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo" onclick="window.location.href='home.html'">
+            <i class="fas fa-hospital-alt"></i> TOJI-KAN
+        </div>
+        <div class="nav-center">
+            <div class="search-bar" onclick="showToast('🔍 Search functionality coming soon')">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search patients, staff..." readonly>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-icon search-icon-mobile" onclick="showToast('🔍 Search coming soon')">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="nav-icon profile-icon" onclick="toggleProfileMenu()">
+                <i class="far fa-user-circle"></i>
+            </div>
+        </div>
+    </div>
+    <div class="profile-menu" id="profileMenu">
+        <div class="profile-header">
+            <i class="fas fa-user-md"></i>
+            <div>
+                <div class="profile-name" id="profileName">Loading...</div>
+                <div class="profile-email" id="profileEmail">Loading...</div>
+            </div>
+        </div>
+        <div class="profile-menu-items">
+            <a onclick="showToast('Profile section coming soon')"><i class="fas fa-user"></i> My Profile</a>
+            <div class="divider"></div>
+            <a onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+</div>
+
+<div class="main-tabs">
+    <div class="tabs-container">
+        <div class="tab active" onclick="navigateTo('home.html')"><i class="fas fa-chart-pie"></i><span>Dashboard</span></div>
+        <div class="tab" onclick="navigateTo('patients.html')"><i class="fas fa-users"></i><span>Patients</span></div>
+        <div class="tab" onclick="navigateTo('staff.html')"><i class="fas fa-user-md"></i><span>Staff</span></div>
+        <div class="tab" onclick="navigateTo('wards.html')"><i class="fas fa-procedures"></i><span>Wards</span></div>
+        <div class="tab" onclick="navigateTo('appointments.html')"><i class="fas fa-calendar-check"></i><span>Appointments</span></div>
+        <div class="tab" onclick="navigateTo('billing.html')"><i class="fas fa-file-invoice-dollar"></i><span>Billing</span></div>
+    </div>
+</div>
+
+<main class="container">
+    <div class="stats-grid">
+        <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-users"></i></div><div class="stat-info"><h3>Total Patients</h3><div class="stat-number" id="totalPatients">--</div><span class="stat-change"><i class="fas fa-sync-alt"></i> Loading...</span></div></div>
+        <div class="stat-card"><div class="stat-icon green"><i class="fas fa-user-md"></i></div><div class="stat-info"><h3>Active Staff</h3><div class="stat-number" id="totalStaff">--</div><span class="stat-change"><i class="fas fa-user-md"></i> Loading staff</span></div></div>
+        <div class="stat-card"><div class="stat-icon orange"><i class="fas fa-calendar-check"></i></div><div class="stat-info"><h3>Today's Appointments</h3><div class="stat-number" id="todayAppointments">--</div><span class="stat-change"><i class="fas fa-clock"></i> Loading...</span></div></div>
+        <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-procedures"></i></div><div class="stat-info"><h3>Available Beds</h3><div class="stat-number" id="availableBeds">--</div><span class="stat-change"><i class="fas fa-bed"></i> Loading wards</span></div></div>
+    </div>
+
+    <div class="quick-actions">
+        <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+        <div class="action-buttons">
+            <button class="action-btn" onclick="navigateTo('patients.html?action=register')">
+                <i class="fas fa-user-plus"></i><span>Register Patient</span>
+            </button>
+            <button class="action-btn" onclick="navigateTo('appointments.html?action=new')">
+                <i class="fas fa-calendar-plus"></i><span>New Appointment</span>
+            </button>
+            <button class="action-btn" onclick="navigateTo('billing.html?action=create')">
+                <i class="fas fa-file-invoice"></i><span>Create Bill</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h3><i class="fas fa-user-injured"></i> Recent Patients</h3>
+                <span class="view-all" onclick="navigateTo('patients.html')">View All →</span>
+            </div>
+            <div class="recent-list" id="recentPatients"><div class="loading-skeleton"><i class="fas fa-spinner fa-pulse"></i> Loading patients...</div></div>
+        </div>
+        
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h3><i class="fas fa-clock"></i> Today's Schedule</h3>
+                <span class="view-all" onclick="navigateTo('appointments.html')">View All →</span>
+            </div>
+            <div class="schedule-list" id="todaySchedule"><div class="loading-skeleton"><i class="fas fa-spinner fa-pulse"></i> Loading appointments...</div></div>
+        </div>
+        
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h3><i class="fas fa-hospital"></i> Ward Status</h3>
+                <span class="view-all" onclick="navigateTo('wards.html')">Manage →</span>
+            </div>
+            <div class="ward-list" id="wardStatus"><div class="loading-skeleton"><i class="fas fa-spinner fa-pulse"></i> Loading wards...</div></div>
+        </div>
+        
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h3><i class="fas fa-file-invoice"></i> Recent Bills</h3>
+                <span class="view-all" onclick="navigateTo('billing.html')">View All →</span>
+            </div>
+            <div class="bill-list" id="recentBills"><div class="loading-skeleton"><i class="fas fa-spinner fa-pulse"></i> Loading bills...</div></div>
+        </div>
+    </div>
+</main>
+<div id="toastMsg" class="toast-msg"></div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    import { getFirestore, collection, getDocs, query, orderBy, limit, where, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCCkkqW21TMAy4NSA217k_fovsdavkF06s",
+    authDomain: "tojikan-hospital.firebaseapp.com",
+    projectId: "tojikan-hospital",
+    storageBucket: "tojikan-hospital.firebasestorage.app",
+    messagingSenderId: "1065678945107",
+    appId: "1:1065678945107:web:cd95704090e3306b5ebfa6",
+    measurementId: "G-MJ1SSXKFWQ"
+  };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    window.showToast = function(msg, duration = 2500) {
+        const toast = document.getElementById('toastMsg');
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.style.opacity = "1";
+        setTimeout(() => { toast.style.opacity = "0"; }, duration);
+    };
+
+    // Navigation function - handles all page redirects
+    window.navigateTo = function(page) {
+        console.log('Navigating to:', page);
+        window.location.href = page;
+    };
+
+    async function loadPatients() {
+        try {
+            const patientsRef = collection(db, "patients");
+            const patientsQuery = query(patientsRef, orderBy("createdAt", "desc"), limit(5));
+            const snapshot = await getDocs(patientsQuery);
+            
+            const patients = [];
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                patients.push({
+                    id: doc.id,
+                    name: data.name || data.fullName || "Unknown",
+                    patientId: data.patientId || data.id || doc.id.slice(0, 6),
+                    date: data.admissionDate || data.date || new Date().toLocaleDateString(),
+                    doctor: data.doctor || data.assignedDoctor || "General"
+                });
+            });
+            
+            const container = document.getElementById('recentPatients');
+            if (patients.length === 0) {
+                container.innerHTML = '<div class="loading-skeleton">📋 No patients yet.</div>';
+            } else {
+                container.innerHTML = patients.map(p => `
+                    <div class="patient-item" onclick="navigateTo('patients.html')" style="cursor:pointer;">
+                        <div class="patient-info">
+                            <h4>${escapeHtml(p.name)}</h4>
+                            <p>ID: ${escapeHtml(p.patientId)} • ${escapeHtml(p.date)}</p>
+                        </div>
+                        <span class="badge">${escapeHtml(p.doctor)}</span>
+                    </div>
+                `).join('');
+            }
+            
+            const allPatientsSnapshot = await getDocs(collection(db, "patients"));
+            document.getElementById('totalPatients').innerText = allPatientsSnapshot.size;
+        } catch (error) {
+            console.error("Error loading patients:", error);
+            document.getElementById('recentPatients').innerHTML = '<div class="loading-skeleton">⚠️ Error loading patients</div>';
+            document.getElementById('totalPatients').innerText = '0';
+        }
+    }
+
+    async function loadAppointments() {
+        try {
+            const appointmentsRef = collection(db, "appointments");
+            const appointmentsQuery = query(appointmentsRef, orderBy("date", "desc"), limit(5));
+            const snapshot = await getDocs(appointmentsQuery);
+            
+            const appointments = [];
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                appointments.push({
+                    time: data.time || "10:00 AM",
+                    patient: data.patientName || "Unknown",
+                    type: data.type || "General",
+                    status: data.status || "Scheduled"
+                });
+            });
+            
+            const container = document.getElementById('todaySchedule');
+            if (appointments.length === 0) {
+                container.innerHTML = '<div class="loading-skeleton">📅 No appointments today</div>';
+            } else {
+                container.innerHTML = appointments.map(a => `
+                    <div class="schedule-item" onclick="navigateTo('appointments.html')" style="cursor:pointer;">
+                        <div>
+                            <span class="badge" style="background:#eef2ff;">${escapeHtml(a.time)}</span>
+                            <div class="schedule-info">
+                                <h4>${escapeHtml(a.patient)}</h4>
+                                <p>${escapeHtml(a.type)}</p>
+                            </div>
+                        </div>
+                        <span class="badge ${a.status === 'Pending' ? 'status-pending' : 'status-confirmed'}">${escapeHtml(a.status)}</span>
+                    </div>
+                `).join('');
+            }
+            
+            const todayStr = new Date().toISOString().split('T')[0];
+            const todayQuery = query(collection(db, "appointments"), where("date", "==", todayStr));
+            const todaySnapshot = await getDocs(todayQuery);
+            document.getElementById('todayAppointments').innerText = todaySnapshot.size;
+        } catch (error) {
+            console.error("Error loading appointments:", error);
+            document.getElementById('todayAppointments').innerText = '0';
+        }
+    }
+
+    async function loadWards() {
+        try {
+            const wardsRef = collection(db, "wards");
+            const snapshot = await getDocs(wardsRef);
+            
+            const wards = [];
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                wards.push({
+                    name: data.name || "Ward",
+                    total: data.totalBeds || 10,
+                    occupied: data.occupiedBeds || 0
+                });
+            });
+            
+            const container = document.getElementById('wardStatus');
+            if (wards.length === 0) {
+                container.innerHTML = '<div class="loading-skeleton">🏥 No wards configured</div>';
+                document.getElementById('availableBeds').innerText = '--';
+            } else {
+                let totalBeds = 0;
+                let occupiedBeds = 0;
+                
+                container.innerHTML = wards.map(w => {
+                    totalBeds += w.total;
+                    occupiedBeds += w.occupied;
+                    const percent = (w.occupied / w.total) * 100;
+                    return `
+                        <div class="ward-item" onclick="navigateTo('wards.html')" style="cursor:pointer;">
+                            <div>
+                                <strong>${escapeHtml(w.name)}</strong>
+                                <div style="font-size:12px;">${w.occupied}/${w.total} beds</div>
+                            </div>
+                            <div class="ward-progress">
+                                <div class="ward-fill" style="width: ${percent}%;"></div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                document.getElementById('availableBeds').innerText = totalBeds - occupiedBeds;
+            }
+        } catch (error) {
+            console.error("Error loading wards:", error);
+            document.getElementById('availableBeds').innerText = '0';
+        }
+    }
+
+    async function loadBills() {
+        try {
+            const billsRef = collection(db, "bills");
+            const billsQuery = query(billsRef, orderBy("createdAt", "desc"), limit(5));
+            const snapshot = await getDocs(billsQuery);
+            
+            const bills = [];
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                bills.push({
+                    patient: data.patientName || "Unknown",
+                    amount: data.amount || `KSh ${data.total || 0}`,
+                    date: data.date || new Date().toLocaleDateString(),
+                    status: data.status || "Unpaid"
+                });
+            });
+            
+            const container = document.getElementById('recentBills');
+            if (bills.length === 0) {
+                container.innerHTML = '<div class="loading-skeleton">💰 No bills yet</div>';
+            } else {
+                container.innerHTML = bills.map(b => `
+                    <div class="bill-item" onclick="navigateTo('billing.html')" style="cursor:pointer;">
+                        <div>
+                            <strong>${escapeHtml(b.patient)}</strong>
+                            <div style="font-size:12px;">${escapeHtml(b.date)}</div>
+                        </div>
+                        <div>
+                            <span style="font-weight:600;">${escapeHtml(b.amount)}</span>
+                            <span style="margin-left:8px; font-size:11px;" class="badge ${b.status === 'Paid' ? 'status-paid' : 'status-unpaid'}">${escapeHtml(b.status)}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        } catch (error) {
+            console.error("Error loading bills:", error);
+        }
+    }
+
+    async function loadStaffCount() {
+        try {
+            const staffRef = collection(db, "staff");
+            const snapshot = await getDocs(staffRef);
+            document.getElementById('totalStaff').innerText = snapshot.size;
+        } catch (error) {
+            console.error("Error loading staff:", error);
+            document.getElementById('totalStaff').innerText = '0';
+        }
+    }
+
+    async function loadDashboardData() {
+        await Promise.all([
+            loadPatients(),
+            loadAppointments(),
+            loadWards(),
+            loadBills(),
+            loadStaffCount()
+        ]);
+    }
+
+    window.toggleProfileMenu = function() {
+        const menu = document.getElementById('profileMenu');
+        if (menu) menu.classList.toggle('show');
+    };
+
+    window.logoutUser = async function() {
+        if (confirm("Are you sure you want to logout?")) {
+            try {
+                await signOut(auth);
+                sessionStorage.removeItem('togikan_currentUser');
+                window.location.href = "index.html";
+            } catch (error) {
+                console.error("Logout error:", error);
+                showToast("Error logging out");
+            }
+        }
+    };
+
+    async function updateUserProfile(user) {
+        try {
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            let userData = {
+                name: user.displayName || user.email.split('@')[0],
+                email: user.email,
+                role: 'Staff'
+            };
+            
+            if (userDoc.exists()) {
+                userData = { ...userData, ...userDoc.data() };
+            }
+            
+            sessionStorage.setItem('togikan_currentUser', JSON.stringify(userData));
+            
+            const profileNameSpan = document.getElementById('profileName');
+            const profileEmailSpan = document.getElementById('profileEmail');
+            
+            if (profileNameSpan) profileNameSpan.textContent = userData.name;
+            if (profileEmailSpan) profileEmailSpan.textContent = userData.email;
+        } catch (error) {
+            console.error("Error loading user profile:", error);
+        }
+    }
+
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            window.location.href = "index.html";
+            return;
+        }
+        updateUserProfile(user);
+        loadDashboardData();
+    });
+
+    document.addEventListener('click', function(e) {
+        const menu = document.getElementById('profileMenu');
+        if (menu && !e.target.closest('.profile-icon') && !e.target.closest('#profileMenu')) {
+            menu.classList.remove('show');
+        }
+    });
+
+    console.log('🔐 Dashboard ready with working navigation');
+</script>
+</body>
+</html>

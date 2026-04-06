@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOJI-KAN Hospital | Secure Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            overflow: hidden;
+            animation: slideUp 0.5s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .hospital-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .hospital-logo i {
+            font-size: 2rem;
+        }
+        
+        .hospital-name {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 1rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .tab-btn.active {
+            color: #2a5298;
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-radius: 3px;
+        }
+        
+        .tab-btn:hover {
+            color: #2a5298;
+        }
+        
+        .form-container {
+            padding: 2rem;
+        }
+        
+        .form {
+            display: none;
+        }
+        
+        .form.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2a5298;
+            font-size: 1rem;
+        }
+        
+        .input-wrapper input,
+        .input-wrapper select {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            background: white;
+        }
+        
+        .input-wrapper select {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232a5298' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 18px;
+        }
+        
+        .input-wrapper input:focus,
+        .input-wrapper select:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 0 4px rgba(42, 82, 152, 0.1);
+        }
+        
+        .error-message {
+            background: #fee;
+            color: #e74c3c;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: shake 0.3s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 60, 114, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #999;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .divider span {
+            padding: 0 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .social-btn:hover:not(:disabled) {
+            border-color: #2a5298;
+            background: #f8f9fa;
+        }
+        
+        .social-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .social-btn.google i { color: #db4437; }
+        .social-btn.facebook i { color: #4267B2; }
+        
+        .login-footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .login-footer a {
+            color: #2a5298;
+            text-decoration: none;
+        }
+        
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .demo-note {
+            background: #e8f0fe;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .demo-note strong {
+            color: #2a5298;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid white;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 550px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+            
+            .social-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="hospital-logo">
+                    <i class="fas fa-hospital-alt"></i>
+                    <span>TOJI-KAN</span>
+                </div>
+                <div class="hospital-name">Private Hospital Management System</div>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('signin')">Sign In</button>
+                <button class="tab-btn" onclick="switchTab('signup')">Create Account</button>
+            </div>
+            
+            <div class="form-container">
+                <!-- Sign In Form -->
+                <div id="signinForm" class="form active">
+                    <div id="signinError" class="error-message" style="display: none;"></div>
+                    <div id="signinSuccess" class="success-message" style="display: none;"></div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="loginEmail" placeholder="e.g., doctor@togikan.com" autocomplete="email">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="loginPassword" placeholder="Enter your password">
+                        </div>
+                    </div>
+                    
+                    <button class="submit-btn" id="signinBtn" onclick="handleSignIn()">
+                        <i class="fas fa-arrow-right"></i> Sign In
+                    </button>
+                    
+                    <div class="demo-note">
+                        <strong>📋 Demo Account:</strong> demo@togikan.com / demo123
+                    </div>
+                </div>
+                
+                <!-- Sign Up Form -->
+                <div id="signupForm" class="form">
+                    <div id="signupError" class="error-message" style="display: none;"></div>
+                    <div id="signupSuccess" class="success-message" style="display: none;"></div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="signupName" placeholder="e.g., Dr. Bernard Wafula">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="signupEmail" placeholder="e.g., doctor@togikan.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone Number</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="signupPhone" placeholder="e.g., 0712345678">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="signupPassword" placeholder="Create a password (min. 6 characters)">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-check-circle"></i> Confirm Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-check-circle"></i>
+                            <input type="password" id="signupConfirmPassword" placeholder="Confirm your password">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-briefcase"></i> Role</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-briefcase"></i>
+                            <select id="signupRole">
+                                <option value="Doctor">Doctor / Physician</option>
+                                <option value="Nurse">Nurse</option>
+                                <option value="Receptionist">Receptionist</option>
+                                <option value="Administrator">Administrator</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="submit-btn" id="signupBtn" onclick="handleSignUp()">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                </div>
+                
+                <div class="divider">
+                    <span>or continue with</span>
+                </div>
+                
+                <div class="social-buttons">
+                    <button class="social-btn google" id="googleSignInBtn" onclick="handleGoogleSignIn()">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button class="social-btn facebook" onclick="socialLogin('facebook')">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </button>
+                </div>
+            </div>
+            
+            <div class="login-footer">
+                <p>© 2024 TOJI-KAN Private Hospital. All rights reserved.</p>
+                <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+        // Firebase Configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCCkkqW21TMAy4NSA217k_fovsdavkF06s",
+    authDomain: "tojikan-hospital.firebaseapp.com",
+    projectId: "tojikan-hospital",
+    storageBucket: "tojikan-hospital.firebasestorage.app",
+    messagingSenderId: "1065678945107",
+    appId: "1:1065678945107:web:cd95704090e3306b5ebfa6",
+    measurementId: "G-MJ1SSXKFWQ"
+  };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        // Set persistence to local
+        setPersistence(auth, browserLocalPersistence);
+        
+        // Google Auth Provider
+        const googleProvider = new GoogleAuthProvider();
+        
+        // Make functions globally available
+        window.switchTab = function(tab) {
+            const signinForm = document.getElementById('signinForm');
+            const signupForm = document.getElementById('signupForm');
+            const tabs = document.querySelectorAll('.tab-btn');
+            
+            if (tab === 'signin') {
+                signinForm.classList.add('active');
+                signupForm.classList.remove('active');
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+            } else {
+                signinForm.classList.remove('active');
+                signupForm.classList.add('active');
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+            }
+            
+            document.getElementById('signinError').style.display = 'none';
+            document.getElementById('signupError').style.display = 'none';
+        };
+        
+        // Show error message
+        function showError(element, message) {
+            element.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+            element.style.display = 'flex';
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 4000);
+        }
+        
+        function showSuccess(element, message) {
+            element.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            element.style.display = 'flex';
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 3000);
+        }
+        
+        function setLoading(button, isLoading) {
+            if (isLoading) {
+                button.disabled = true;
+                button.innerHTML = '<span class="loading-spinner"></span> Processing...';
+            } else {
+                button.disabled = false;
+                const originalText = button.id === 'signinBtn' ? '<i class="fas fa-arrow-right"></i> Sign In' : '<i class="fas fa-user-plus"></i> Create Account';
+                button.innerHTML = originalText;
+            }
+        }
+        
+        // Handle Sign In - Redirect to home.html
+        window.handleSignIn = async function() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const errorDiv = document.getElementById('signinError');
+            const successDiv = document.getElementById('signinSuccess');
+            const button = document.getElementById('signinBtn');
+            
+            if (!email || !password) {
+                showError(errorDiv, 'Please enter both email and password');
+                return;
+            }
+            
+            setLoading(button, true);
+            
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Get user profile from Firestore
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                let userData = {
+                    id: user.uid,
+                    name: user.displayName || email.split('@')[0],
+                    email: user.email,
+                    role: 'Staff'
+                };
+                
+                if (userDoc.exists()) {
+                    userData = { ...userData, ...userDoc.data() };
+                }
+                
+                sessionStorage.setItem('togikan_currentUser', JSON.stringify(userData));
+                showSuccess(successDiv, '✅ Login successful! Redirecting to dashboard...');
+                
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Sign in error:', error);
+                let errorMessage = 'Invalid email or password';
+                if (error.code === 'auth/user-not-found') {
+                    errorMessage = 'No account found with this email';
+                } else if (error.code === 'auth/wrong-password') {
+                    errorMessage = 'Incorrect password';
+                } else if (error.code === 'auth/too-many-requests') {
+                    errorMessage = 'Too many failed attempts. Please try again later';
+                }
+                showError(errorDiv, errorMessage);
+            } finally {
+                setLoading(button, false);
+            }
+        };
+        
+        // Handle Sign Up - Redirect to home.html
+        window.handleSignUp = async function() {
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const phone = document.getElementById('signupPhone').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            const role = document.getElementById('signupRole').value;
+            const errorDiv = document.getElementById('signupError');
+            const successDiv = document.getElementById('signupSuccess');
+            const button = document.getElementById('signupBtn');
+            
+            if (!name || !email || !phone || !password || !confirmPassword) {
+                showError(errorDiv, 'Please fill in all required fields');
+                return;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError(errorDiv, 'Please enter a valid email address');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError(errorDiv, 'Password must be at least 6 characters');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showError(errorDiv, 'Passwords do not match');
+                return;
+            }
+            
+            setLoading(button, true);
+            
+            try {
+                // Create user in Firebase Auth
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Store user profile in Firestore
+                const userData = {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    role: role,
+                    createdAt: new Date().toISOString(),
+                    uid: user.uid
+                };
+                
+                await setDoc(doc(db, "users", user.uid), userData);
+                
+                // Store in session
+                sessionStorage.setItem('togikan_currentUser', JSON.stringify({
+                    id: user.uid,
+                    name: name,
+                    email: email,
+                    role: role
+                }));
+                
+                showSuccess(successDiv, '✅ Account created successfully! Redirecting to dashboard...');
+                
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Sign up error:', error);
+                let errorMessage = 'Registration failed. Please try again.';
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage = 'Email already registered. Please sign in instead.';
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage = 'Password is too weak. Use at least 6 characters.';
+                }
+                showError(errorDiv, errorMessage);
+            } finally {
+                setLoading(button, false);
+            }
+        };
+        
+        // Handle Google Sign In - Redirect to home.html
+        window.handleGoogleSignIn = async function() {
+            const button = document.getElementById('googleSignInBtn');
+            button.disabled = true;
+            button.innerHTML = '<span class="loading-spinner"></span> Connecting...';
+            
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+                const user = result.user;
+                
+                // Check if user exists in Firestore, if not create profile
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                
+                if (!userDoc.exists()) {
+                    const userData = {
+                        name: user.displayName || user.email.split('@')[0],
+                        email: user.email,
+                        phone: user.phoneNumber || '',
+                        role: 'Staff',
+                        createdAt: new Date().toISOString(),
+                        uid: user.uid
+                    };
+                    await setDoc(doc(db, "users", user.uid), userData);
+                }
+                
+                const userProfile = {
+                    id: user.uid,
+                    name: user.displayName || user.email.split('@')[0],
+                    email: user.email,
+                    role: userDoc.exists() ? userDoc.data().role : 'Staff'
+                };
+                
+                sessionStorage.setItem('togikan_currentUser', JSON.stringify(userProfile));
+                
+                const successDiv = document.getElementById('signinSuccess');
+                if (successDiv) {
+                    showSuccess(successDiv, '✅ Google sign in successful! Redirecting to dashboard...');
+                }
+                
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Google sign in error:', error);
+                const errorDiv = document.getElementById('signinError');
+                if (errorDiv) {
+                    showError(errorDiv, 'Google sign in failed. Please try again.');
+                }
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '<i class="fab fa-google"></i> Google';
+            }
+        };
+        
+        // Facebook login placeholder
+        window.socialLogin = function(provider) {
+            alert(`🔐 ${provider.charAt(0).toUpperCase() + provider.slice(1)} login will be available soon!`);
+        };
+        
+        // Check if user is already logged in - if yes, redirect to home.html
+        function checkExistingSession() {
+            const currentUser = sessionStorage.getItem('togikan_currentUser');
+            if (currentUser) {
+                window.location.href = 'home.html';
+            }
+        }
+        
+        // Also check Firebase auth state
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in, redirect to home
+                window.location.href = 'home.html';
+            }
+        });
+        
+        // Enter key to submit
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const activeForm = document.querySelector('.form.active');
+                if (activeForm && activeForm.id === 'signinForm') {
+                    handleSignIn();
+                } else if (activeForm && activeForm.id === 'signupForm') {
+                    handleSignUp();
+                }
+            }
+        });
+        
+        checkExistingSession();
+        console.log('🔥 Firebase Auth initialized - Ready for secure login');
+    </script>
+</body>
+</html>

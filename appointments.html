@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOJI-KAN Hospital | Appointments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f7fc;
+            color: #1e2a3e;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            cursor: pointer;
+        }
+
+        .logo i {
+            background: none;
+            color: #2c6e9e;
+            margin-right: 6px;
+        }
+
+        .nav-center {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
+        }
+
+        .search-bar {
+            background: #f1f5f9;
+            border-radius: 40px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .search-bar i {
+            color: #5a6e85;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-icon {
+            width: 42px;
+            height: 42px;
+            background: #f0f4fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav-icon:hover {
+            background: #e2e8f0;
+        }
+
+        /* Profile menu */
+        .profile-menu {
+            position: absolute;
+            top: 75px;
+            right: 2rem;
+            background: white;
+            width: 280px;
+            border-radius: 20px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            padding: 1rem;
+            display: none;
+            z-index: 200;
+        }
+
+        .profile-menu.show {
+            display: block;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .profile-header i {
+            font-size: 2.5rem;
+            color: #2c6e9e;
+        }
+
+        .profile-name {
+            font-weight: 700;
+        }
+
+        .profile-email {
+            font-size: 0.75rem;
+            color: #5f7f9e;
+        }
+
+        .profile-menu-items a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 8px;
+            color: #1e2a3e;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: 0.1s;
+            cursor: pointer;
+        }
+
+        .profile-menu-items a:hover {
+            background: #f0f6fe;
+        }
+
+        .divider {
+            height: 1px;
+            background: #edf2f7;
+            margin: 8px 0;
+        }
+
+        /* Main Tabs */
+        .main-tabs {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 2rem;
+        }
+
+        .tabs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 1rem 0;
+            font-weight: 500;
+            color: #5a6e85;
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            transition: 0.2s;
+        }
+
+        .tab.active {
+            color: #1e5b9e;
+            border-bottom-color: #1e5b9e;
+        }
+
+        .tab:hover:not(.active) {
+            color: #2c3e66;
+            border-bottom-color: #cbd5e1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #2c3e50;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Appointment Stats */
+        .appointment-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        
+        .stat-icon.total { background: #3498db20; color: #3498db; }
+        .stat-icon.scheduled { background: #f39c1220; color: #f39c12; }
+        .stat-icon.completed { background: #27ae6020; color: #27ae60; }
+        .stat-icon.cancelled { background: #e74c3c20; color: #e74c3c; }
+        
+        .stat-info h3 {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        /* Calendar */
+        .calendar-view {
+            background: white;
+            border-radius: 25px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .calendar-nav button {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            border: 2px solid #f0f0f0;
+            border-radius: 10px;
+            padding: 0.5rem;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .calendar-day:hover {
+            border-color: #2a5298;
+            background: #f8f9fa;
+        }
+        
+        .calendar-day.today {
+            border-color: #2a5298;
+            background: rgba(42, 82, 152, 0.05);
+        }
+        
+        .calendar-day.has-appointments::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 8px;
+            height: 8px;
+            background: #2a5298;
+            border-radius: 50%;
+        }
+        
+        .day-number {
+            font-weight: 600;
+        }
+        
+        /* Appointments List */
+        .appointments-list {
+            background: white;
+            border-radius: 25px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .appointment-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .appointment-tab {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            background: #f1f5f9;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        
+        .appointment-tab.active {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+        
+        .appointment-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 2px solid #f0f0f0;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .appointment-card:hover {
+            border-color: #2a5298;
+            transform: translateX(5px);
+        }
+        
+        .appointment-time {
+            text-align: center;
+            min-width: 80px;
+        }
+        
+        .appointment-time .time {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .appointment-info {
+            flex: 1;
+        }
+        
+        .appointment-info h4 {
+            margin-bottom: 0.3rem;
+            color: #2c3e50;
+        }
+        
+        .appointment-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .appointment-doctor {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            color: #2a5298;
+        }
+        
+        .appointment-status {
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-scheduled { background: #f39c1220; color: #f39c12; }
+        .status-completed { background: #27ae6020; color: #27ae60; }
+        .status-cancelled { background: #e74c3c20; color: #e74c3c; }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            color: white;
+            font-size: 1.3rem;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .toast-msg {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #1e293b;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 40px;
+            z-index: 1000;
+            opacity: 0;
+            transition: 0.2s;
+            pointer-events: none;
+        }
+        
+        @media (max-width: 768px) {
+            .appointment-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .tabs-container {
+                gap: 1rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo" onclick="window.location.href='home.html'">
+            <i class="fas fa-hospital-alt"></i> TOJI-KAN
+        </div>
+        <div class="nav-center">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="appointmentSearch" placeholder="Search appointments..." onkeyup="searchAppointments()">
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-icon profile-icon" onclick="toggleProfileMenu()">
+                <i class="far fa-user-circle"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="profile-menu" id="profileMenu">
+        <div class="profile-header">
+            <i class="fas fa-user-md"></i>
+            <div>
+                <div class="profile-name" id="profileName">Loading...</div>
+                <div class="profile-email" id="profileEmail">Loading...</div>
+            </div>
+        </div>
+        <div class="profile-menu-items">
+            <a onclick="showToast('Profile section')"><i class="fas fa-user"></i> My Profile</a>
+            <div class="divider"></div>
+            <a onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+</div>
+
+<div class="main-tabs">
+    <div class="tabs-container">
+        <a href="home.html" class="tab"><i class="fas fa-chart-pie"></i> Dashboard</a>
+        <a href="patients.html" class="tab"><i class="fas fa-users"></i> Patients</a>
+        <a href="staff.html" class="tab"><i class="fas fa-user-md"></i> Staff</a>
+        <a href="wards.html" class="tab"><i class="fas fa-procedures"></i> Wards</a>
+        <a href="appointments.html" class="tab active"><i class="fas fa-calendar-check"></i> Appointments</a>
+        <a href="billing.html" class="tab"><i class="fas fa-file-invoice-dollar"></i> Billing</a>
+    </div>
+</div>
+
+<main class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-calendar-check"></i> Appointment Scheduling</h1>
+        <button class="btn-primary" onclick="showBookAppointmentModal()">
+            <i class="fas fa-plus-circle"></i> Book New Appointment
+        </button>
+    </div>
+
+    <div class="appointment-stats">
+        <div class="stat-card">
+            <div class="stat-icon total"><i class="fas fa-calendar-alt"></i></div>
+            <div class="stat-info"><h3>Total Appointments</h3><div class="stat-number" id="totalAppointments">0</div></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon scheduled"><i class="fas fa-clock"></i></div>
+            <div class="stat-info"><h3>Scheduled</h3><div class="stat-number" id="scheduledAppointments">0</div></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon completed"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-info"><h3>Completed</h3><div class="stat-number" id="completedAppointments">0</div></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon cancelled"><i class="fas fa-times-circle"></i></div>
+            <div class="stat-info"><h3>Cancelled</h3><div class="stat-number" id="cancelledAppointments">0</div></div>
+        </div>
+    </div>
+
+    <div class="calendar-view">
+        <div class="calendar-header">
+            <h2><i class="fas fa-calendar"></i> <span id="currentMonth"></span></h2>
+            <div class="calendar-nav">
+                <button onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="weekdays"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+    </div>
+
+    <div class="appointments-list">
+        <div class="list-header">
+            <h2><i class="fas fa-list"></i> Appointments</h2>
+            <button class="btn-secondary" onclick="exportAppointments()"><i class="fas fa-download"></i> Export</button>
+        </div>
+        <div class="appointment-tabs">
+            <button class="appointment-tab active" onclick="filterAppointments('all', this)">All</button>
+            <button class="appointment-tab" onclick="filterAppointments('scheduled', this)">Scheduled</button>
+            <button class="appointment-tab" onclick="filterAppointments('completed', this)">Completed</button>
+            <button class="appointment-tab" onclick="filterAppointments('cancelled', this)">Cancelled</button>
+        </div>
+        <div id="appointmentsContainer"></div>
+    </div>
+</main>
+
+<div id="toastMsg" class="toast-msg"></div>
+
+<!-- Book Appointment Modal -->
+<div class="modal" id="appointmentModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-calendar-plus"></i> Book New Appointment</h2>
+            <button class="close-btn" onclick="closeAppointmentModal()">&times;</button>
+        </div>
+        <form id="appointmentForm" onsubmit="saveAppointment(event)" style="padding: 2rem;">
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Select Patient *</label>
+                <select id="appointmentPatientId" required></select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-user-md"></i> Select Doctor *</label>
+                <select id="appointmentDoctorId" required></select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-calendar"></i> Appointment Date *</label>
+                <input type="date" id="appointmentDate" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> Appointment Time *</label>
+                <select id="appointmentTime" required>
+                    <option value="">-- Select Time --</option>
+                    <option value="09:00">09:00 AM</option><option value="09:30">09:30 AM</option>
+                    <option value="10:00">10:00 AM</option><option value="10:30">10:30 AM</option>
+                    <option value="11:00">11:00 AM</option><option value="11:30">11:30 AM</option>
+                    <option value="14:00">02:00 PM</option><option value="14:30">02:30 PM</option>
+                    <option value="15:00">03:00 PM</option><option value="15:30">03:30 PM</option>
+                    <option value="16:00">04:00 PM</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-stethoscope"></i> Reason for Visit</label>
+                <textarea id="appointmentReason" rows="3" placeholder="Enter reason..."></textarea>
+            </div>
+            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+                <button type="button" class="btn-secondary" onclick="closeAppointmentModal()">Cancel</button>
+                <button type="submit" class="btn-primary">Book Appointment</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    import { getFirestore, collection, getDocs, addDoc, updateDoc, doc, query, orderBy, where } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCCkkqW21TMAy4NSA217k_fovsdavkF06s",
+    authDomain: "tojikan-hospital.firebaseapp.com",
+    projectId: "tojikan-hospital",
+    storageBucket: "tojikan-hospital.firebasestorage.app",
+    messagingSenderId: "1065678945107",
+    appId: "1:1065678945107:web:cd95704090e3306b5ebfa6",
+    measurementId: "G-MJ1SSXKFWQ"
+  };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let appointments = [];
+    let patients = [];
+    let staff = [];
+    let currentFilter = 'all';
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+    let selectedAppointmentId = null;
+
+    function showToast(msg) {
+        const toast = document.getElementById('toastMsg');
+        toast.textContent = msg;
+        toast.style.opacity = "1";
+        setTimeout(() => toast.style.opacity = "0", 2500);
+    }
+    window.showToast = showToast;
+
+    async function loadData() {
+        const patientsSnap = await getDocs(collection(db, "patients"));
+        patients = patientsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        const staffSnap = await getDocs(collection(db, "staff"));
+        staff = staffSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        const appointmentsSnap = await getDocs(query(collection(db, "appointments"), orderBy("date", "desc")));
+        appointments = appointmentsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        updateStats();
+        loadCalendar();
+        loadAppointments();
+        loadDropdowns();
+    }
+
+    function updateStats() {
+        document.getElementById('totalAppointments').textContent = appointments.length;
+        document.getElementById('scheduledAppointments').textContent = appointments.filter(a => a.status === 'scheduled').length;
+        document.getElementById('completedAppointments').textContent = appointments.filter(a => a.status === 'completed').length;
+        document.getElementById('cancelledAppointments').textContent = appointments.filter(a => a.status === 'cancelled').length;
+    }
+
+    function loadCalendar() {
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        document.getElementById('currentMonth').textContent = monthNames[currentMonth] + ' ' + currentYear;
+        
+        const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+        const today = new Date();
+        
+        let html = '';
+        for (let i = 0; i < firstDay; i++) html += '<div class="calendar-day"></div>';
+        
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            const appointmentsToday = appointments.filter(a => a.date === dateStr).length;
+            const isToday = today.getDate() === day && today.getMonth() === currentMonth && today.getFullYear() === currentYear;
+            
+            html += `<div class="calendar-day ${isToday ? 'today' : ''} ${appointmentsToday > 0 ? 'has-appointments' : ''}" onclick="viewDateAppointments('${dateStr}')">
+                        <div class="day-number">${day}</div>
+                        ${appointmentsToday > 0 ? `<div class="appointment-count">${appointmentsToday}</div>` : ''}
+                    </div>`;
+        }
+        document.getElementById('calendarGrid').innerHTML = html;
+    }
+    window.changeMonth = function(delta) {
+        currentMonth += delta;
+        if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+        if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+        loadCalendar();
+    };
+    window.changeMonth = changeMonth;
+
+    function loadDropdowns() {
+        const patientSelect = document.getElementById('appointmentPatientId');
+        const doctorSelect = document.getElementById('appointmentDoctorId');
+        
+        patientSelect.innerHTML = '<option value="">-- Choose Patient --</option>' + 
+            patients.map(p => `<option value="${p.id}">${p.name || p.firstName + ' ' + p.lastName}</option>`).join('');
+        
+        const doctors = staff.filter(s => s.role === 'Doctor' || s.role === 'Physician');
+        doctorSelect.innerHTML = '<option value="">-- Choose Doctor --</option>' + 
+            doctors.map(d => `<option value="${d.id}">${d.name || d.firstName + ' ' + d.lastName} (${d.role})</option>`).join('');
+    }
+
+    function loadAppointments() {
+        let filtered = appointments;
+        if (currentFilter !== 'all') filtered = appointments.filter(a => a.status === currentFilter);
+        filtered.sort((a, b) => new Date(a.date + ' ' + a.time) - new Date(b.date + ' ' + b.time));
+        
+        const container = document.getElementById('appointmentsContainer');
+        if (filtered.length === 0) {
+            container.innerHTML = '<div class="empty-state"><i class="fas fa-calendar-times"></i><h3>No appointments found</h3></div>';
+            return;
+        }
+        
+        container.innerHTML = filtered.map(a => `
+            <div class="appointment-card" onclick="viewAppointment('${a.id}')">
+                <div class="appointment-time"><div class="time">${a.time}</div><div class="date">${a.date}</div></div>
+                <div class="appointment-info">
+                    <h4>${a.patientName}</h4>
+                    <p>${a.reason || 'No reason specified'}</p>
+                    <div class="appointment-doctor"><i class="fas fa-user-md"></i> ${a.doctorName}</div>
+                </div>
+                <span class="appointment-status status-${a.status}">${a.status}</span>
+            </div>
+        `).join('');
+    }
+
+    window.filterAppointments = function(status, btn) {
+        currentFilter = status;
+        document.querySelectorAll('.appointment-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        loadAppointments();
+    };
+
+    window.showBookAppointmentModal = function() {
+        loadDropdowns();
+        document.getElementById('appointmentModal').classList.add('active');
+    };
+    window.closeAppointmentModal = function() {
+        document.getElementById('appointmentModal').classList.remove('active');
+        document.getElementById('appointmentForm').reset();
+    };
+
+    window.saveAppointment = async function(event) {
+        event.preventDefault();
+        const patientId = document.getElementById('appointmentPatientId').value;
+        const doctorId = document.getElementById('appointmentDoctorId').value;
+        const patient = patients.find(p => p.id === patientId);
+        const doctor = staff.find(d => d.id === doctorId);
+        
+        const newAppointment = {
+            patientId, patientName: patient.name || patient.firstName + ' ' + patient.lastName,
+            doctorId, doctorName: doctor.name || doctor.firstName + ' ' + doctor.lastName,
+            date: document.getElementById('appointmentDate').value,
+            time: document.getElementById('appointmentTime').value,
+            reason: document.getElementById('appointmentReason').value,
+            status: 'scheduled',
+            createdAt: new Date().toISOString()
+        };
+        
+        const docRef = await addDoc(collection(db, "appointments"), newAppointment);
+        appointments.push({ id: docRef.id, ...newAppointment });
+        closeAppointmentModal();
+        updateStats();
+        loadCalendar();
+        loadAppointments();
+        showToast('✅ Appointment booked successfully!');
+    };
+
+    window.viewAppointment = function(id) {
+        selectedAppointmentId = id;
+        const apt = appointments.find(a => a.id === id);
+        if (!apt) return;
+        
+        const details = `
+            <div style="padding: 2rem;">
+                <h3>${apt.patientName}</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                    <div><strong>Date:</strong> ${apt.date}</div>
+                    <div><strong>Time:</strong> ${apt.time}</div>
+                    <div><strong>Doctor:</strong> ${apt.doctorName}</div>
+                    <div><strong>Status:</strong> ${apt.status}</div>
+                    <div style="grid-column: span 2;"><strong>Reason:</strong> ${apt.reason || 'Not specified'}</div>
+                </div>
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button class="btn-primary" style="background:#27ae60;" onclick="completeAppointment()">✓ Mark Completed</button>
+                    <button class="btn-primary" style="background:#e74c3c;" onclick="cancelAppointment()">✗ Cancel</button>
+                </div>
+            </div>
+        `;
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal active';
+        modal.innerHTML = `<div class="modal-content"><div class="modal-header"><h2>Appointment Details</h2><button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button></div>${details}</div>`;
+        document.body.appendChild(modal);
+    };
+
+    window.completeAppointment = async function() {
+        if (!selectedAppointmentId) return;
+        const aptRef = doc(db, "appointments", selectedAppointmentId);
+        await updateDoc(aptRef, { status: 'completed' });
+        const apt = appointments.find(a => a.id === selectedAppointmentId);
+        if (apt) apt.status = 'completed';
+        document.querySelector('.modal.active')?.remove();
+        updateStats();
+        loadCalendar();
+        loadAppointments();
+        showToast('✅ Appointment marked as completed');
+    };
+
+    window.cancelAppointment = async function() {
+        if (!selectedAppointmentId) return;
+        if (confirm('Cancel this appointment?')) {
+            const aptRef = doc(db, "appointments", selectedAppointmentId);
+            await updateDoc(aptRef, { status: 'cancelled' });
+            const apt = appointments.find(a => a.id === selectedAppointmentId);
+            if (apt) apt.status = 'cancelled';
+            document.querySelector('.modal.active')?.remove();
+            updateStats();
+            loadCalendar();
+            loadAppointments();
+            showToast('✅ Appointment cancelled');
+        }
+    };
+
+    window.viewDateAppointments = function(date) {
+        const onDate = appointments.filter(a => a.date === date);
+        if (onDate.length === 0) { showToast(`No appointments on ${date}`); return; }
+        let msg = `📅 Appointments for ${date}:\n`;
+        onDate.forEach(a => msg += `${a.time} - ${a.patientName} (${a.status})\n`);
+        alert(msg);
+    };
+
+    window.searchAppointments = function() {
+        const term = document.getElementById('appointmentSearch')?.value.toLowerCase();
+        if (!term || term.length < 2) { loadAppointments(); return; }
+        const filtered = appointments.filter(a => a.patientName.toLowerCase().includes(term) || a.doctorName.toLowerCase().includes(term));
+        const container = document.getElementById('appointmentsContainer');
+        if (filtered.length === 0) container.innerHTML = '<div class="empty-state">No matching appointments</div>';
+        else container.innerHTML = filtered.map(a => `
+            <div class="appointment-card" onclick="viewAppointment('${a.id}')">
+                <div class="appointment-time"><div class="time">${a.time}</div></div>
+                <div class="appointment-info"><h4>${a.patientName}</h4><div class="appointment-doctor">${a.doctorName}</div></div>
+                <span class="appointment-status status-${a.status}">${a.status}</span>
+            </div>
+        `).join('');
+    };
+
+    window.exportAppointments = function() {
+        let text = "TOJI-KAN Hospital - Appointments Report\n\n";
+        appointments.forEach(a => text += `${a.date} ${a.time} | ${a.patientName} | ${a.doctorName} | ${a.status}\n`);
+        alert("Export feature - would download file");
+    };
+
+    window.toggleProfileMenu = function() {
+        document.getElementById('profileMenu').classList.toggle('show');
+    };
+
+    window.logoutUser = async function() {
+        if (confirm('Logout?')) {
+            await signOut(auth);
+            sessionStorage.removeItem('togikan_currentUser');
+            window.location.href = 'index.html';
+        }
+    };
+
+    function updateUserProfile(user) {
+        document.getElementById('profileName').textContent = user.displayName || user.email.split('@')[0];
+        document.getElementById('profileEmail').textContent = user.email;
+    }
+
+    onAuthStateChanged(auth, (user) => {
+        if (!user) window.location.href = 'index.html';
+        else { updateUserProfile(user); loadData(); }
+    });
+
+    document.addEventListener('click', (e) => {
+        const menu = document.getElementById('profileMenu');
+        if (menu && !e.target.closest('.profile-icon') && !e.target.closest('#profileMenu')) menu.classList.remove('show');
+    });
+    
+    window.showToast = showToast;
+</script>
+</body>
+</html>

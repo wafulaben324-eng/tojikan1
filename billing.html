@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOJI-KAN Hospital | Billing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f7fc;
+            color: #1e2a3e;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            cursor: pointer;
+        }
+
+        .logo i {
+            background: none;
+            color: #2c6e9e;
+            margin-right: 6px;
+        }
+
+        .nav-center {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
+        }
+
+        .search-bar {
+            background: #f1f5f9;
+            border-radius: 40px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .search-bar i {
+            color: #5a6e85;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-icon {
+            width: 42px;
+            height: 42px;
+            background: #f0f4fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav-icon:hover {
+            background: #e2e8f0;
+        }
+
+        /* Profile menu */
+        .profile-menu {
+            position: absolute;
+            top: 75px;
+            right: 2rem;
+            background: white;
+            width: 280px;
+            border-radius: 20px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            padding: 1rem;
+            display: none;
+            z-index: 200;
+        }
+
+        .profile-menu.show {
+            display: block;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .profile-header i {
+            font-size: 2.5rem;
+            color: #2c6e9e;
+        }
+
+        .profile-name {
+            font-weight: 700;
+        }
+
+        .profile-email {
+            font-size: 0.75rem;
+            color: #5f7f9e;
+        }
+
+        .profile-menu-items a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 8px;
+            color: #1e2a3e;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: 0.1s;
+            cursor: pointer;
+        }
+
+        .profile-menu-items a:hover {
+            background: #f0f6fe;
+        }
+
+        .divider {
+            height: 1px;
+            background: #edf2f7;
+            margin: 8px 0;
+        }
+
+        /* Main Tabs */
+        .main-tabs {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 2rem;
+        }
+
+        .tabs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 1rem 0;
+            font-weight: 500;
+            color: #5a6e85;
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            color: #1e5b9e;
+            border-bottom-color: #1e5b9e;
+        }
+
+        .tab:hover:not(.active) {
+            color: #2c3e66;
+            border-bottom-color: #cbd5e1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #2c3e50;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Billing Stats */
+        .billing-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .finance-card {
+            background: white;
+            border-radius: 25px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .finance-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .finance-icon.total { background: linear-gradient(135deg, #3498db, #2980b9); color: white; }
+        .finance-icon.paid { background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; }
+        .finance-icon.pending { background: linear-gradient(135deg, #f39c12, #e67e22); color: white; }
+        
+        .finance-info h3 {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+        
+        .finance-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        /* Quick Invoice */
+        .quick-invoice {
+            background: white;
+            border-radius: 25px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .quick-invoice h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .service-items {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .add-service {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .add-service input {
+            flex: 1;
+        }
+        
+        .bill-summary {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-top: 1.5rem;
+        }
+        
+        .bill-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .bill-total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        /* Invoices Grid */
+        .invoice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .invoice-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .invoice-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .invoice-id {
+            font-weight: 600;
+            color: #2a5298;
+        }
+        
+        .invoice-status {
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-paid { background: #27ae6020; color: #27ae60; }
+        .status-pending { background: #f39c1220; color: #f39c12; }
+        .status-partial { background: #9b59b620; color: #9b59b6; }
+        
+        .invoice-patient {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .invoice-amount {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 1rem 0;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            color: white;
+            font-size: 1.3rem;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: white;
+        }
+        
+        .payment-history {
+            background: white;
+            border-radius: 25px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .payment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .payment-amount {
+            font-weight: 700;
+            color: #27ae60;
+        }
+        
+        .toast-msg {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #1e293b;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 40px;
+            z-index: 1000;
+            opacity: 0;
+            transition: 0.2s;
+            pointer-events: none;
+        }
+        
+        @media (max-width: 768px) {
+            .add-service {
+                flex-direction: column;
+            }
+            .tabs-container {
+                gap: 1rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo" onclick="navigateTo('home.html')">
+            <i class="fas fa-hospital-alt"></i> TOJI-KAN
+        </div>
+        <div class="nav-center">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="billingSearch" placeholder="Search invoices..." onkeyup="searchInvoices()">
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-icon profile-icon" onclick="toggleProfileMenu()">
+                <i class="far fa-user-circle"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="profile-menu" id="profileMenu">
+        <div class="profile-header">
+            <i class="fas fa-user-md"></i>
+            <div>
+                <div class="profile-name" id="profileName">Loading...</div>
+                <div class="profile-email" id="profileEmail">Loading...</div>
+            </div>
+        </div>
+        <div class="profile-menu-items">
+            <a onclick="showToast('Profile section coming soon')"><i class="fas fa-user"></i> My Profile</a>
+            <div class="divider"></div>
+            <a onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+</div>
+
+<div class="main-tabs">
+    <div class="tabs-container">
+        <div class="tab" onclick="navigateTo('home.html')"><i class="fas fa-chart-pie"></i> Dashboard</div>
+        <div class="tab" onclick="navigateTo('patients.html')"><i class="fas fa-users"></i> Patients</div>
+        <div class="tab" onclick="navigateTo('staff.html')"><i class="fas fa-user-md"></i> Staff</div>
+        <div class="tab" onclick="navigateTo('wards.html')"><i class="fas fa-procedures"></i> Wards</div>
+        <div class="tab" onclick="navigateTo('appointments.html')"><i class="fas fa-calendar-check"></i> Appointments</div>
+        <div class="tab active" onclick="navigateTo('billing.html')"><i class="fas fa-file-invoice-dollar"></i> Billing</div>
+    </div>
+</div>
+
+<main class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-file-invoice-dollar"></i> Billing & Invoices</h1>
+        <button class="btn-primary" onclick="showCreateInvoiceModal()">
+            <i class="fas fa-plus-circle"></i> Create New Invoice
+        </button>
+    </div>
+
+    <div class="billing-stats">
+        <div class="finance-card">
+            <div class="finance-icon total"><i class="fas fa-chart-line"></i></div>
+            <div class="finance-info"><h3>Total Revenue</h3><div class="finance-number" id="totalRevenue">KSh 0</div></div>
+        </div>
+        <div class="finance-card">
+            <div class="finance-icon paid"><i class="fas fa-check-circle"></i></div>
+            <div class="finance-info"><h3>Paid</h3><div class="finance-number" id="paidAmount">KSh 0</div></div>
+        </div>
+        <div class="finance-card">
+            <div class="finance-icon pending"><i class="fas fa-clock"></i></div>
+            <div class="finance-info"><h3>Pending</h3><div class="finance-number" id="pendingAmount">KSh 0</div></div>
+        </div>
+    </div>
+
+    <div class="quick-invoice">
+        <h2><i class="fas fa-bolt"></i> Quick Invoice</h2>
+        
+        <div class="form-group">
+            <label><i class="fas fa-user"></i> Select Patient *</label>
+            <select id="invoicePatientId"></select>
+        </div>
+        
+        <h3 style="margin: 1.5rem 0 1rem;">Service Items</h3>
+        <div class="service-items" id="serviceItems">
+            <div style="text-align: center; padding: 1rem; color: #666;">No items added yet</div>
+        </div>
+        
+        <div class="add-service">
+            <input type="text" id="serviceName" placeholder="Service name (e.g., Consultation)">
+            <input type="number" id="servicePrice" placeholder="Price (KSh)" min="0">
+            <button class="btn-primary" onclick="addServiceItem()" style="padding: 12px 20px;">
+                <i class="fas fa-plus"></i> Add
+            </button>
+        </div>
+        
+        <div class="bill-summary">
+            <div class="bill-summary-row"><span>Subtotal:</span><span id="subtotal">KSh 0</span></div>
+            <div class="bill-summary-row"><span>Tax (16% VAT):</span><span id="tax">KSh 0</span></div>
+            <div class="bill-summary-row bill-total"><span>Total:</span><span id="total">KSh 0</span></div>
+        </div>
+        
+        <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1rem;">
+            <button class="btn-secondary" onclick="resetInvoice()">Reset</button>
+            <button class="btn-primary" onclick="saveInvoice()"><i class="fas fa-save"></i> Generate Invoice</button>
+        </div>
+    </div>
+
+    <div style="margin-top: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2><i class="fas fa-history"></i> Invoice History</h2>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn-secondary" onclick="filterInvoices('all', this)">All</button>
+                <button class="btn-secondary" onclick="filterInvoices('paid', this)">Paid</button>
+                <button class="btn-secondary" onclick="filterInvoices('pending', this)">Pending</button>
+            </div>
+        </div>
+        <div class="invoice-grid" id="invoicesContainer"></div>
+    </div>
+
+    <div class="payment-history">
+        <h2><i class="fas fa-credit-card"></i> Recent Payments</h2>
+        <div id="paymentHistory"></div>
+    </div>
+</main>
+
+<div id="toastMsg" class="toast-msg"></div>
+
+<!-- Payment Modal -->
+<div class="modal" id="paymentModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-credit-card"></i> Record Payment</h2>
+            <button class="close-btn" onclick="closePaymentModal()">&times;</button>
+        </div>
+        <form id="paymentForm" onsubmit="savePayment(event)" style="padding: 2rem;">
+            <input type="hidden" id="paymentInvoiceId">
+            <div class="form-group">
+                <label>Invoice #<span id="paymentInvoiceNumber"></span></label>
+            </div>
+            <div class="form-group">
+                <label>Patient</label>
+                <div id="paymentPatientName" style="font-weight: 600;"></div>
+            </div>
+            <div class="form-group">
+                <label>Total Amount</label>
+                <div id="paymentTotalAmount" style="font-weight: 700;"></div>
+            </div>
+            <div class="form-group">
+                <label>Payment Amount *</label>
+                <input type="number" id="paymentAmount" required min="1">
+            </div>
+            <div class="form-group">
+                <label>Payment Method</label>
+                <select id="paymentMethod">
+                    <option value="Cash">Cash</option>
+                    <option value="M-Pesa">M-Pesa</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Insurance">Insurance</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+                <button type="button" class="btn-secondary" onclick="closePaymentModal()">Cancel</button>
+                <button type="submit" class="btn-primary">Record Payment</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    import { getFirestore, collection, getDocs, addDoc, updateDoc, doc, query, orderBy, limit, where } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCCkkqW21TMAy4NSA217k_fovsdavkF06s",
+    authDomain: "tojikan-hospital.firebaseapp.com",
+    projectId: "tojikan-hospital",
+    storageBucket: "tojikan-hospital.firebasestorage.app",
+    messagingSenderId: "1065678945107",
+    appId: "1:1065678945107:web:cd95704090e3306b5ebfa6",
+    measurementId: "G-MJ1SSXKFWQ"
+  };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let invoices = [];
+    let patients = [];
+    let serviceItems = [];
+    let currentFilter = 'all';
+    let selectedInvoiceId = null;
+
+    function showToast(msg) {
+        const toast = document.getElementById('toastMsg');
+        toast.textContent = msg;
+        toast.style.opacity = "1";
+        setTimeout(() => toast.style.opacity = "0", 2500);
+    }
+    window.showToast = showToast;
+
+    window.navigateTo = function(page) {
+        window.location.href = page;
+    };
+
+    async function loadData() {
+        const patientsSnap = await getDocs(collection(db, "patients"));
+        patients = patientsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        const invoicesSnap = await getDocs(query(collection(db, "invoices"), orderBy("createdAt", "desc")));
+        invoices = invoicesSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        loadPatientDropdown();
+        updateStats();
+        loadInvoices();
+        loadPaymentHistory();
+    }
+
+    function loadPatientDropdown() {
+        const select = document.getElementById('invoicePatientId');
+        select.innerHTML = '<option value="">-- Choose Patient --</option>' + 
+            patients.map(p => `<option value="${p.id}">${p.name || p.firstName + ' ' + p.lastName}</option>`).join('');
+    }
+
+    function updateStats() {
+        const total = invoices.reduce((sum, inv) => sum + (inv.total || 0), 0);
+        const paid = invoices.filter(inv => inv.status === 'paid').reduce((sum, inv) => sum + (inv.total || 0), 0);
+        const pending = invoices.filter(inv => inv.status === 'pending').reduce((sum, inv) => sum + (inv.total || 0), 0);
+        
+        document.getElementById('totalRevenue').textContent = 'KSh ' + total.toLocaleString();
+        document.getElementById('paidAmount').textContent = 'KSh ' + paid.toLocaleString();
+        document.getElementById('pendingAmount').textContent = 'KSh ' + pending.toLocaleString();
+    }
+
+    window.addServiceItem = function() {
+        const name = document.getElementById('serviceName').value;
+        const price = parseFloat(document.getElementById('servicePrice').value);
+        
+        if (!name || !price || price <= 0) {
+            showToast('Please enter valid service name and price');
+            return;
+        }
+        
+        serviceItems.push({ name, price });
+        document.getElementById('serviceName').value = '';
+        document.getElementById('servicePrice').value = '';
+        updateServiceItemsDisplay();
+        calculateTotals();
+    };
+
+    function updateServiceItemsDisplay() {
+        const container = document.getElementById('serviceItems');
+        if (serviceItems.length === 0) {
+            container.innerHTML = '<div style="text-align: center; padding: 1rem; color: #666;">No items added yet</div>';
+            return;
+        }
+        
+        container.innerHTML = serviceItems.map((item, index) => `
+            <div class="service-item">
+                <div><strong>${item.name}</strong> - KSh ${item.price.toLocaleString()}</div>
+                <button class="btn-secondary" onclick="removeServiceItem(${index})" style="padding: 5px 10px;">Remove</button>
+            </div>
+        `).join('');
+    }
+
+    window.removeServiceItem = function(index) {
+        serviceItems.splice(index, 1);
+        updateServiceItemsDisplay();
+        calculateTotals();
+    };
+
+    function calculateTotals() {
+        const subtotal = serviceItems.reduce((sum, item) => sum + item.price, 0);
+        const tax = subtotal * 0.16;
+        const total = subtotal + tax;
+        
+        document.getElementById('subtotal').textContent = 'KSh ' + subtotal.toLocaleString();
+        document.getElementById('tax').textContent = 'KSh ' + tax.toLocaleString();
+        document.getElementById('total').textContent = 'KSh ' + total.toLocaleString();
+    }
+
+    window.resetInvoice = function() {
+        serviceItems = [];
+        document.getElementById('invoicePatientId').value = '';
+        updateServiceItemsDisplay();
+        calculateTotals();
+    };
+
+    window.saveInvoice = async function() {
+        const patientId = document.getElementById('invoicePatientId').value;
+        
+        if (!patientId) {
+            showToast('Please select a patient');
+            return;
+        }
+        
+        if (serviceItems.length === 0) {
+            showToast('Please add at least one service item');
+            return;
+        }
+        
+        const patient = patients.find(p => p.id === patientId);
+        if (!patient) return;
+        
+        const subtotal = serviceItems.reduce((sum, item) => sum + item.price, 0);
+        const tax = subtotal * 0.16;
+        const total = subtotal + tax;
+        
+        const invoiceId = 'INV-' + new Date().getFullYear() + '-' + String(invoices.length + 1).padStart(4, '0');
+        
+        const newInvoice = {
+            invoiceId: invoiceId,
+            patientId: patientId,
+            patientName: patient.name || patient.firstName + ' ' + patient.lastName,
+            date: new Date().toISOString().split('T')[0],
+            items: [...serviceItems],
+            subtotal: subtotal,
+            tax: tax,
+            total: total,
+            paid: 0,
+            status: 'pending',
+            payments: [],
+            createdAt: new Date().toISOString()
+        };
+        
+        const docRef = await addDoc(collection(db, "invoices"), newInvoice);
+        invoices.unshift({ id: docRef.id, ...newInvoice });
+        
+        resetInvoice();
+        updateStats();
+        loadInvoices();
+        loadPaymentHistory();
+        showToast('✅ Invoice created successfully!');
+    };
+
+    function loadInvoices() {
+        let filtered = invoices;
+        if (currentFilter !== 'all') {
+            filtered = invoices.filter(inv => inv.status === currentFilter);
+        }
+        
+        const container = document.getElementById('invoicesContainer');
+        if (filtered.length === 0) {
+            container.innerHTML = '<div style="text-align: center; padding: 3rem; color: #666;">No invoices found</div>';
+            return;
+        }
+        
+        container.innerHTML = filtered.map(inv => `
+            <div class="invoice-card" onclick="viewInvoice('${inv.id}')">
+                <div class="invoice-header">
+                    <span class="invoice-id">${inv.invoiceId}</span>
+                    <span class="invoice-status status-${inv.status}">${inv.status.toUpperCase()}</span>
+                </div>
+                <div class="invoice-patient">${inv.patientName}</div>
+                <div class="invoice-amount">KSh ${(inv.total || 0).toLocaleString()}</div>
+                <div style="font-size: 0.8rem; color: #666;">${inv.date}</div>
+            </div>
+        `).join('');
+    }
+
+    window.filterInvoices = function(status, btn) {
+        currentFilter = status;
+        document.querySelectorAll('.billing-tabs .btn-secondary, .billing-stats + div .btn-secondary').forEach(b => b.style.background = '#f1f5f9');
+        btn.style.background = '#2a5298';
+        btn.style.color = 'white';
+        loadInvoices();
+    };
+
+    window.viewInvoice = async function(id) {
+        const invoice = invoices.find(inv => inv.id === id);
+        if (!invoice) return;
+        
+        selectedInvoiceId = id;
+        
+        const itemsList = invoice.items.map(item => `
+            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                <span>${item.name}</span>
+                <span>KSh ${item.price.toLocaleString()}</span>
+            </div>
+        `).join('');
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal active';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Invoice Details</h2>
+                    <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+                </div>
+                <div style="padding: 2rem;">
+                    <div class="invoice-header" style="margin-bottom: 1rem;">
+                        <span class="invoice-id">${invoice.invoiceId}</span>
+                        <span class="invoice-status status-${invoice.status}">${invoice.status.toUpperCase()}</span>
+                    </div>
+                    <p><strong>Patient:</strong> ${invoice.patientName}</p>
+                    <p><strong>Date:</strong> ${invoice.date}</p>
+                    
+                    <h4 style="margin: 1.5rem 0 0.5rem;">Services</h4>
+                    <div style="border-bottom: 1px solid #e0e0e0; margin-bottom: 1rem;">${itemsList}</div>
+                    
+                    <div style="margin: 1rem 0;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Subtotal:</span><span>KSh ${invoice.subtotal.toLocaleString()}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Tax (16%):</span><span>KSh ${invoice.tax.toLocaleString()}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.2rem;">
+                            <span>Total:</span><span>KSh ${invoice.total.toLocaleString()}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; color: #27ae60;">
+                            <span>Paid:</span><span>KSh ${invoice.paid.toLocaleString()}</span>
+                        </div>
+                        ${invoice.paid < invoice.total ? `
+                            <div style="display: flex; justify-content: space-between; color: #e74c3c;">
+                                <span>Balance:</span><span>KSh ${(invoice.total - invoice.paid).toLocaleString()}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        ${invoice.status !== 'paid' ? `
+                            <button class="btn-primary" onclick="openPaymentModal('${invoice.id}')">Record Payment</button>
+                        ` : ''}
+                        <button class="btn-secondary" onclick="this.closest('.modal').remove()">Close</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    };
+
+    window.openPaymentModal = async function(invoiceId) {
+        const invoice = invoices.find(inv => inv.id === invoiceId);
+        if (!invoice) return;
+        
+        selectedInvoiceId = invoiceId;
+        
+        document.getElementById('paymentInvoiceId').value = invoice.id;
+        document.getElementById('paymentInvoiceNumber').textContent = invoice.invoiceId;
+        document.getElementById('paymentPatientName').textContent = invoice.patientName;
+        document.getElementById('paymentTotalAmount').textContent = 'KSh ' + invoice.total.toLocaleString();
+        document.getElementById('paymentAmount').max = invoice.total - invoice.paid;
+        document.getElementById('paymentAmount').value = invoice.total - invoice.paid;
+        
+        document.querySelector('.modal.active')?.remove();
+        document.getElementById('paymentModal').classList.add('active');
+    };
+
+    window.savePayment = async function(event) {
+        event.preventDefault();
+        
+        const invoiceId = document.getElementById('paymentInvoiceId').value;
+        const amount = parseFloat(document.getElementById('paymentAmount').value);
+        const method = document.getElementById('paymentMethod').value;
+        
+        const invoice = invoices.find(inv => inv.id === invoiceId);
+        if (!invoice) return;
+        
+        const newPaid = invoice.paid + amount;
+        const newStatus = newPaid >= invoice.total ? 'paid' : 'partial';
+        
+        const payment = {
+            amount: amount,
+            method: method,
+            date: new Date().toISOString().split('T')[0],
+            timestamp: new Date().toISOString()
+        };
+        
+        const updatedPayments = [...(invoice.payments || []), payment];
+        
+        const invoiceRef = doc(db, "invoices", invoiceId);
+        await updateDoc(invoiceRef, {
+            paid: newPaid,
+            status: newStatus,
+            payments: updatedPayments
+        });
+        
+        invoice.paid = newPaid;
+        invoice.status = newStatus;
+        invoice.payments = updatedPayments;
+        
+        closePaymentModal();
+        updateStats();
+        loadInvoices();
+        loadPaymentHistory();
+        showToast('✅ Payment recorded successfully!');
+    };
+
+    window.closePaymentModal = function() {
+        document.getElementById('paymentModal').classList.remove('active');
+        document.getElementById('paymentForm').reset();
+    };
+
+    function loadPaymentHistory() {
+        const container = document.getElementById('paymentHistory');
+        const allPayments = [];
+        
+        invoices.forEach(inv => {
+            if (inv.payments && inv.payments.length > 0) {
+                inv.payments.forEach(p => {
+                    allPayments.push({
+                        ...p,
+                        patientName: inv.patientName,
+                        invoiceId: inv.invoiceId
+                    });
+                });
+            }
+        });
+        
+        allPayments.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        if (allPayments.length === 0) {
+            container.innerHTML = '<div style="text-align: center; padding: 2rem; color: #666;">No payment history</div>';
+            return;
+        }
+        
+        container.innerHTML = allPayments.slice(0, 5).map(p => `
+            <div class="payment-item">
+                <div>
+                    <strong>${p.patientName}</strong><br>
+                    <small>${p.invoiceId} • ${p.method} • ${p.date}</small>
+                </div>
+                <div class="payment-amount">KSh ${p.amount.toLocaleString()}</div>
+            </div>
+        `).join('');
+    }
+
+    window.searchInvoices = function() {
+        const term = document.getElementById('billingSearch')?.value.toLowerCase();
+        if (!term || term.length < 2) {
+            loadInvoices();
+            return;
+        }
+        
+        const filtered = invoices.filter(inv => 
+            inv.patientName.toLowerCase().includes(term) || 
+            inv.invoiceId.toLowerCase().includes(term)
+        );
+        
+        const container = document.getElementById('invoicesContainer');
+        if (filtered.length === 0) {
+            container.innerHTML = '<div style="text-align: center; padding: 3rem;">No matching invoices</div>';
+        } else {
+            container.innerHTML = filtered.map(inv => `
+                <div class="invoice-card" onclick="viewInvoice('${inv.id}')">
+                    <div class="invoice-header">
+                        <span class="invoice-id">${inv.invoiceId}</span>
+                        <span class="invoice-status status-${inv.status}">${inv.status.toUpperCase()}</span>
+                    </div>
+                    <div class="invoice-patient">${inv.patientName}</div>
+                    <div class="invoice-amount">KSh ${(inv.total || 0).toLocaleString()}</div>
+                </div>
+            `).join('');
+        }
+    };
+
+    window.showCreateInvoiceModal = function() {
+        document.getElementById('invoicePatientId').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    window.toggleProfileMenu = function() {
+        document.getElementById('profileMenu').classList.toggle('show');
+    };
+
+    window.logoutUser = async function() {
+        if (confirm('Are you sure you want to logout?')) {
+            await signOut(auth);
+            sessionStorage.removeItem('togikan_currentUser');
+            window.location.href = 'index.html';
+        }
+    };
+
+    function updateUserProfile(user) {
+        document.getElementById('profileName').textContent = user.displayName || user.email.split('@')[0];
+        document.getElementById('profileEmail').textContent = user.email;
+    }
+
+    onAuthStateChanged(auth, (user) => {
+        if (!user) window.location.href = 'index.html';
+        else { updateUserProfile(user); loadData(); }
+    });
+
+    document.addEventListener('click', (e) => {
+        const menu = document.getElementById('profileMenu');
+        if (menu && !e.target.closest('.profile-icon') && !e.target.closest('#profileMenu')) menu.classList.remove('show');
+    });
+    
+    // Make functions globally available
+    window.addServiceItem = addServiceItem;
+    window.removeServiceItem = removeServiceItem;
+    window.resetInvoice = resetInvoice;
+    window.saveInvoice = saveInvoice;
+    window.filterInvoices = filterInvoices;
+    window.viewInvoice = viewInvoice;
+    window.openPaymentModal = openPaymentModal;
+    window.savePayment = savePayment;
+    window.closePaymentModal = closePaymentModal;
+    window.searchInvoices = searchInvoices;
+    window.showCreateInvoiceModal = showCreateInvoiceModal;
+    window.toggleProfileMenu = toggleProfileMenu;
+    window.logoutUser = logoutUser;
+    window.navigateTo = navigateTo;
+</script>
+</body>
+</html>

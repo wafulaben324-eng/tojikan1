@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOJI-KAN Hospital | System Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #666;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .test-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .test-card h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .test-card h2 i {
+            color: #667eea;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-info {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .result-item {
+            padding: 0.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .result-item.success {
+            color: #27ae60;
+        }
+        
+        .result-item.error {
+            color: #e74c3c;
+        }
+        
+        .result-item.info {
+            color: #3498db;
+        }
+        
+        .result-item.warning {
+            color: #f39c12;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .status-pass {
+            background: #27ae6020;
+            color: #27ae60;
+        }
+        
+        .status-fail {
+            background: #e74c3c20;
+            color: #e74c3c;
+        }
+        
+        .status-warning {
+            background: #f39c1220;
+            color: #f39c12;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #3498db);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-box {
+            background: #f0f0f0;
+            border-radius: 10px;
+            padding: 0.8rem;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            font-size: 0.7rem;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="header">
+            <h1>🔧 TOJI-KAN Hospital System Test</h1>
+            <p>Comprehensive system diagnostic and verification tool</p>
+        </div>
+        
+        <div class="test-grid">
+            <!-- System Tests -->
+            <div class="test-card">
+                <h2><i class="fas fa-microchip"></i> System Tests</h2>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="runFullSystemTest()">
+                        <i class="fas fa-play"></i> Run All Tests
+                    </button>
+                    <button class="btn btn-info" onclick="checkFirebaseConnection()">
+                        <i class="fas fa-fire"></i> Check Firebase
+                    </button>
+                    <button class="btn btn-success" onclick="clearResults()">
+                        <i class="fas fa-trash"></i> Clear Results
+                    </button>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <!-- Data Tests -->
+            <div class="test-card">
+                <h2><i class="fas fa-database"></i> Data Tests</h2>
+                <div class="button-group">
+                    <button class="btn btn-info" onclick="checkDataArrays()">
+                        <i class="fas fa-table"></i> Check Data Arrays
+                    </button>
+                    <button class="btn btn-warning" onclick="showDataStats()">
+                        <i class="fas fa-chart-bar"></i> Show Statistics
+                    </button>
+                    <button class="btn btn-success" onclick="testCRUDOperations()">
+                        <i class="fas fa-flask"></i> Test CRUD
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Navigation Tests -->
+            <div class="test-card">
+                <h2><i class="fas fa-link"></i> Navigation Tests</h2>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="testNavigation()">
+                        <i class="fas fa-arrow-right"></i> Test Navigation
+                    </button>
+                    <button class="btn btn-info" onclick="checkFunctions()">
+                        <i class="fas fa-code"></i> Check Functions
+                    </button>
+                    <button class="btn btn-warning" onclick="testModals()">
+                        <i class="fas fa-window-maximize"></i> Test Modals
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Test Results -->
+        <div class="test-card">
+            <h2><i class="fas fa-clipboard-list"></i> Test Results</h2>
+            <div id="testStats" class="stats-grid">
+                <div class="stat-box"><div class="stat-number" id="totalTests">0</div><div class="stat-label">Total Tests</div></div>
+                <div class="stat-box"><div class="stat-number" id="passedTests">0</div><div class="stat-label">Passed</div></div>
+                <div class="stat-box"><div class="stat-number" id="failedTests">0</div><div class="stat-label">Failed</div></div>
+                <div class="stat-box"><div class="stat-number" id="warningTests">0</div><div class="stat-label">Warnings</div></div>
+            </div>
+            <div id="testOutput" class="result-box">
+                <div class="result-item info">Click "Run All Tests" to start system verification...</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let testResults = [];
+        let totalTests = 0;
+        let passedTests = 0;
+        let failedTests = 0;
+        let warningTests = 0;
+        
+        function addResult(message, type = 'info') {
+            const output = document.getElementById('testOutput');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `result-item ${type}`;
+            
+            const timestamp = new Date().toLocaleTimeString();
+            resultDiv.innerHTML = `[${timestamp}] ${message}`;
+            output.appendChild(resultDiv);
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Update stats
+            if (type === 'success') passedTests++;
+            else if (type === 'error') failedTests++;
+            else if (type === 'warning') warningTests++;
+            
+            totalTests++;
+            updateStats();
+        }
+        
+        function updateStats() {
+            document.getElementById('totalTests').textContent = totalTests;
+            document.getElementById('passedTests').textContent = passedTests;
+            document.getElementById('failedTests').textContent = failedTests;
+            document.getElementById('warningTests').textContent = warningTests;
+            
+            const progress = totalTests > 0 ? ((passedTests + warningTests) / totalTests) * 100 : 0;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+        
+        function clearResults() {
+            document.getElementById('testOutput').innerHTML = '';
+            totalTests = 0;
+            passedTests = 0;
+            failedTests = 0;
+            warningTests = 0;
+            updateStats();
+            addResult('🧹 Results cleared', 'info');
+        }
+        
+        // Run full system test
+        window.runFullSystemTest = async function() {
+            clearResults();
+            addResult('🚀 Starting full system test...', 'info');
+            
+            // Check if Firebase is loaded
+            if (typeof firebase !== 'undefined' || typeof window.firebaseApp !== 'undefined') {
+                addResult('✅ Firebase SDK detected', 'success');
+            } else {
+                addResult('⚠️ Firebase SDK not detected (may load later)', 'warning');
+            }
+            
+            // Check authentication
+            setTimeout(() => {
+                const currentUser = sessionStorage.getItem('togikan_currentUser');
+                if (currentUser) {
+                    const user = JSON.parse(currentUser);
+                    addResult(`✅ User logged in: ${user.name} (${user.email})`, 'success');
+                } else {
+                    addResult('⚠️ No user logged in - redirect to login page', 'warning');
+                }
+            }, 100);
+            
+            // Check data arrays
+            await checkDataArrays();
+            
+            // Check functions
+            await checkFunctions();
+            
+            // Test navigation
+            await testNavigation();
+            
+            // Test modals
+            await testModals();
+            
+            addResult('✨ System test completed!', 'success');
+        };
+        
+        // Check Firebase connection
+        window.checkFirebaseConnection = function() {
+            addResult('🔍 Checking Firebase connection...', 'info');
+            
+            if (typeof firebase !== 'undefined') {
+                addResult('✅ Firebase SDK loaded', 'success');
+                addResult(`📦 Firebase version: ${firebase.SDK_VERSION || 'Unknown'}`, 'success');
+            } else if (typeof window.firebaseApp !== 'undefined') {
+                addResult('✅ Firebase initialized', 'success');
+            } else {
+                addResult('❌ Firebase not loaded - check firebase-config.js', 'error');
+            }
+        };
+        
+        // Check data arrays
+        window.checkDataArrays = function() {
+            addResult('📊 Checking data arrays...', 'info');
+            
+            const dataChecks = [
+                { name: 'patients', exists: typeof window.patients !== 'undefined' },
+                { name: 'staff', exists: typeof window.staff !== 'undefined' },
+                { name: 'appointments', exists: typeof window.appointments !== 'undefined' },
+                { name: 'wards', exists: typeof window.wards !== 'undefined' },
+                { name: 'bills', exists: typeof window.bills !== 'undefined' }
+            ];
+            
+            dataChecks.forEach(check => {
+                if (check.exists) {
+                    const length = window[check.name]?.length || 0;
+                    addResult(`✅ ${check.name} array exists (${length} items)`, 'success');
+                } else {
+                    addResult(`⚠️ ${check.name} array not found (may load from Firebase)`, 'warning');
+                }
+            });
+        };
+        
+        // Show data statistics
+        window.showDataStats = function() {
+            addResult('📈 Data Statistics:', 'info');
+            
+            const stats = {
+                'Patients': window.patients?.length || 0,
+                'Staff': window.staff?.length || 0,
+                'Appointments': window.appointments?.length || 0,
+                'Wards': window.wards?.length || 0,
+                'Bills': window.bills?.length || 0
+            };
+            
+            Object.entries(stats).forEach(([key, value]) => {
+                addResult(`   ${key}: ${value}`, 'info');
+            });
+        };
+        
+        // Check functions
+        window.checkFunctions = function() {
+            addResult('🔧 Checking functions...', 'info');
+            
+            const essentialFunctions = [
+                'showRegisterModal', 'viewPatient', 'editPatient', 'deletePatient',
+                'searchPatients', 'filterPatients', 'toggleProfileMenu', 'logout',
+                'showAddStaffModal', 'loadStaffTable', 'saveStaff', 'loadPatients'
+            ];
+            
+            let foundCount = 0;
+            essentialFunctions.forEach(func => {
+                if (typeof window[func] === 'function') {
+                    addResult(`✅ ${func}() is available`, 'success');
+                    foundCount++;
+                } else {
+                    addResult(`❌ ${func}() is missing`, 'error');
+                }
+            });
+            
+            addResult(`📊 Functions found: ${foundCount}/${essentialFunctions.length}`, 'info');
+        };
+        
+        // Test navigation
+        window.testNavigation = function() {
+            addResult('🧭 Testing navigation...', 'info');
+            
+            const pages = [
+                { name: 'Dashboard', url: 'home.html' },
+                { name: 'Patients', url: 'patients.html' },
+                { name: 'Staff', url: 'staff.html' },
+                { name: 'Wards', url: 'wards.html' },
+                { name: 'Appointments', url: 'appointments.html' },
+                { name: 'Billing', url: 'billing.html' }
+            ];
+            
+            pages.forEach(page => {
+                addResult(`📄 ${page.name} -> ${page.url} (click to test)`, 'info');
+            });
+            
+            addResult('💡 Navigation functions ready', 'success');
+        };
+        
+        // Test modals
+        window.testModals = function() {
+            addResult('🪟 Testing modals...', 'info');
+            
+            const modals = ['patientModal', 'staffModal', 'viewPatientModal', 'viewStaffModal'];
+            
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    addResult(`✅ Modal #${modalId} found`, 'success');
+                } else {
+                    addResult(`ℹ️ Modal #${modalId} not on this page`, 'warning');
+                }
+            });
+        };
+        
+        // Test CRUD operations (simulated)
+        window.testCRUDOperations = function() {
+            addResult('💾 Testing CRUD operations...', 'info');
+            
+            // Test Create
+            if (typeof window.savePatient === 'function' || typeof window.saveStaff === 'function') {
+                addResult('✅ Create function available', 'success');
+            } else {
+                addResult('⚠️ Create function not found', 'warning');
+            }
+            
+            // Test Read
+            if (typeof window.viewPatient === 'function' || typeof window.viewStaff === 'function') {
+                addResult('✅ Read function available', 'success');
+            } else {
+                addResult('⚠️ Read function not found', 'warning');
+            }
+            
+            // Test Update
+            if (typeof window.editPatient === 'function' || typeof window.editStaff === 'function') {
+                addResult('✅ Update function available', 'success');
+            } else {
+                addResult('⚠️ Update function not found', 'warning');
+            }
+            
+            // Test Delete
+            if (typeof window.deletePatient === 'function' || typeof window.deleteStaff === 'function') {
+                addResult('✅ Delete function available', 'success');
+            } else {
+                addResult('⚠️ Delete function not found', 'warning');
+            }
+        };
+        
+        // Add Font Awesome if not already loaded
+        if (!document.querySelector('link[href*="font-awesome"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+            document.head.appendChild(link);
+        }
+        
+        // Auto-run test on load
+        setTimeout(() => {
+            addResult('✅ Test page loaded successfully', 'success');
+            addResult('💡 Click "Run All Tests" to start full system verification', 'info');
+        }, 500);
+    </script>
+    
+    <!-- Load your main scripts -->
+    <script src="script.js"></script>
+    <script type="module">
+        // Check Firebase initialization
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+        
+  const firebaseConfig = {
+    apiKey: "AIzaSyCCkkqW21TMAy4NSA217k_fovsdavkF06s",
+    authDomain: "tojikan-hospital.firebaseapp.com",
+    projectId: "tojikan-hospital",
+    storageBucket: "tojikan-hospital.firebasestorage.app",
+    messagingSenderId: "1065678945107",
+    appId: "1:1065678945107:web:cd95704090e3306b5ebfa6",
+    measurementId: "G-MJ1SSXKFWQ"
+  };
+        try {
+            const app = initializeApp(firebaseConfig);
+            window.firebaseApp = app;
+            console.log('✅ Firebase initialized for test page');
+        } catch (e) {
+            console.log('Firebase already initialized');
+        }
+    </script>
+</body>
+</html>
