@@ -1209,7 +1209,7 @@
         }).join('');
     }
 
-    function renderRoomsGrid() {
+window.renderRoomsGrid = function() {
         const ward = wards.find(w => w.id === currentRoomWard);
         if (!ward) return;
         
@@ -1299,7 +1299,7 @@
         document.getElementById('bulkAddModal').classList.remove('active');
     };
 
-    function updateBulkPreview() {
+window.updateBulkPreview = function() {
         const format = document.getElementById('bulkFormat').value;
         const count = parseInt(document.getElementById('bulkCount').value) || 1;
         const wardId = document.getElementById('bulkWard').value;
@@ -1737,6 +1737,8 @@
     window.bulkAddRooms = bulkAddRooms;
     window.deleteRoom = deleteRoom;
     window.quickAdmitToRoom = quickAdmitToRoom;
+    window.updateBulkPreview = updateBulkPreview;
+
 </script>
 </body>
 </html>
