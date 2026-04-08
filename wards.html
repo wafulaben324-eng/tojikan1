@@ -266,6 +266,46 @@
             gap: 8px;
         }
 
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .btn-success:hover {
+            background: #2ecc71;
+            transform: translateY(-2px);
+        }
+
         /* Ward Grid */
         .ward-grid {
             display: grid;
@@ -500,6 +540,142 @@
             color: #666;
         }
         
+        /* Room Management Section */
+        .room-management {
+            background: white;
+            border-radius: 25px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .room-management h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .ward-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .ward-tab-btn {
+            padding: 10px 24px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .ward-tab-btn.active {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+        
+        .room-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .room-card.available {
+            border-left: 4px solid #27ae60;
+            background: #f0fff4;
+        }
+        
+        .room-card.occupied {
+            border-left: 4px solid #e74c3c;
+            background: #fff5f5;
+            opacity: 0.7;
+        }
+        
+        .room-number-display {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .room-status {
+            font-size: 0.7rem;
+            margin-top: 0.3rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .status-available {
+            background: #27ae6020;
+            color: #27ae60;
+        }
+        
+        .status-occupied {
+            background: #e74c3c20;
+            color: #e74c3c;
+        }
+        
+        .room-actions {
+            margin-top: 0.5rem;
+            display: flex;
+            gap: 0.3rem;
+            justify-content: center;
+        }
+        
+        .room-action-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+        
+        .add-room-form {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+        
+        .add-room-form .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .add-room-form label {
+            font-size: 0.75rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .add-room-form input {
+            padding: 8px 12px;
+        }
+        
         /* Modal */
         .modal {
             display: none;
@@ -649,27 +825,6 @@
             pointer-events: none;
         }
 
-        /* Room management button styles */
-        .btn-add-room {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-
-        .btn-add-room:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
-        }
-
         @media (max-width: 768px) {
             .form-grid {
                 grid-template-columns: 1fr;
@@ -695,6 +850,9 @@
             }
             .header-buttons {
                 flex-direction: column;
+            }
+            .rooms-grid {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
             }
         }
     </style>
@@ -747,12 +905,14 @@
 </div>
 
 <main class="container">
-<div class="page-header">
-    <h1><i class="fas fa-procedures"></i> Ward Management</h1>
-    <button class="btn-primary" onclick="showAdmitPatientModal()">
-        <i class="fas fa-user-plus"></i> Admit Patient
-    </button>
-</div>
+    <div class="page-header">
+        <h1><i class="fas fa-procedures"></i> Ward Management</h1>
+        <div class="header-buttons">
+            <button class="btn-primary" onclick="showAdmitPatientModal()">
+                <i class="fas fa-user-plus"></i> Admit Patient
+            </button>
+        </div>
+    </div>
 
     <div class="ward-summary" id="wardSummary">
         <div class="summary-item"><div class="value" id="totalBeds">0</div><div class="label">Total Beds</div></div>
@@ -761,8 +921,76 @@
         <div class="summary-item"><div class="value" id="occupancyRate">0%</div><div class="label">Occupancy Rate</div></div>
     </div>
 
+    <!-- Room Management Section -->
+    <div class="room-management">
+        <h2><i class="fas fa-door-open"></i> Room Management</h2>
+        
+        <div class="ward-tabs" id="roomWardTabs">
+            <button class="ward-tab-btn active" onclick="selectRoomWard('newborn', this)">👶 New Born Ward</button>
+            <button class="ward-tab-btn" onclick="selectRoomWard('middle', this)">👨 Middle Age Ward</button>
+            <button class="ward-tab-btn" onclick="selectRoomWard('old', this)">👴 Old Age Ward</button>
+        </div>
+        
+        <div id="roomsContainer" class="rooms-grid">
+            <!-- Rooms will be dynamically loaded here -->
+        </div>
+        
+        <div class="add-room-form">
+            <div class="form-group" style="flex: 2;">
+                <label>Room Number</label>
+                <input type="text" id="newRoomNumber" placeholder="e.g., 101, A1, 201B">
+            </div>
+            <button class="btn-success" onclick="addSingleRoom()">
+                <i class="fas fa-plus"></i> Add Room
+            </button>
+            <button class="btn-primary" onclick="showBulkAddModal()">
+                <i class="fas fa-layer-group"></i> Bulk Add
+            </button>
+        </div>
+    </div>
+
     <div class="ward-grid" id="wardGrid"></div>
 </main>
+
+<!-- Bulk Add Rooms Modal -->
+<div class="modal" id="bulkAddModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-layer-group"></i> Bulk Add Rooms</h2>
+            <button class="close-btn" onclick="closeBulkAddModal()">&times;</button>
+        </div>
+        <form id="bulkAddForm" onsubmit="bulkAddRooms(event)">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>Select Ward *</label>
+                    <select id="bulkWard" required>
+                        <option value="newborn">New Born Ward</option>
+                        <option value="middle">Middle Age Ward</option>
+                        <option value="old">Old Age Ward</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <label>Room Number Format *</label>
+                    <input type="text" id="bulkFormat" placeholder="e.g., 1, A, 200" required>
+                    <small>Rooms will be: Format + number (e.g., 1 → 101, 102; A → A1, A2)</small>
+                </div>
+                <div class="form-group full-width">
+                    <label>Number of Rooms to Add *</label>
+                    <input type="number" id="bulkCount" min="1" max="30" value="5" required>
+                </div>
+                <div class="form-group full-width">
+                    <div id="bulkPreview" style="background: #f8f9fa; padding: 1rem; border-radius: 12px;">
+                        <strong>Preview:</strong> <span id="bulkPreviewRooms">-</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" onclick="closeBulkAddModal()">Cancel</button>
+                <button type="submit" class="btn-primary">Add Rooms</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <!-- Admit Patient Modal -->
 <div class="modal" id="admitModal">
@@ -857,15 +1085,15 @@
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
     import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCCkkqW21TMAy4NSA217k_fovsdavkF06s",
-    authDomain: "tojikan-hospital.firebaseapp.com",
-    projectId: "tojikan-hospital",
-    storageBucket: "tojikan-hospital.firebasestorage.app",
-    messagingSenderId: "1065678945107",
-    appId: "1:1065678945107:web:cd95704090e3306b5ebfa6",
-    measurementId: "G-MJ1SSXKFWQ"
-  };
+    const firebaseConfig = {
+        apiKey: "AIzaSyCCkkqW21TMAy4NSA217k_fovsdavkF06s",
+        authDomain: "tojikan-hospital.firebaseapp.com",
+        projectId: "tojikan-hospital",
+        storageBucket: "tojikan-hospital.firebasestorage.app",
+        messagingSenderId: "1065678945107",
+        appId: "1:1065678945107:web:cd95704090e3306b5ebfa6",
+        measurementId: "G-MJ1SSXKFWQ"
+    };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -875,6 +1103,7 @@
     let patients = [];
     let admissions = [];
     let currentPatient = null;
+    let currentRoomWard = 'newborn';
 
     function showToast(msg) {
         const toast = document.getElementById('toastMsg');
@@ -897,10 +1126,11 @@
         
         const wardsSnap = await getDocs(collection(db, "wards"));
         if (wardsSnap.empty) {
+            // Create default wards with some initial rooms
             wards = [
-                { id: "newborn", name: "New Born", icon: "fa-baby", totalBeds: 10, rooms: this.generateRooms(10, 100) },
-                { id: "middle", name: "Middle Age", icon: "fa-user", totalBeds: 15, rooms: this.generateRooms(15, 200) },
-                { id: "old", name: "Old Age", icon: "fa-user-plus", totalBeds: 12, rooms: this.generateRooms(12, 300) }
+                { id: "newborn", name: "New Born", icon: "fa-baby", totalBeds: 0, rooms: [] },
+                { id: "middle", name: "Middle Age", icon: "fa-user", totalBeds: 0, rooms: [] },
+                { id: "old", name: "Old Age", icon: "fa-user-plus", totalBeds: 0, rooms: [] }
             ];
             for (const ward of wards) {
                 await addDoc(collection(db, "wards"), ward);
@@ -913,14 +1143,7 @@
         renderWards();
         updateStats();
         loadPatientSelect();
-    }
-
-    function generateRooms(count, start) {
-        const rooms = [];
-        for (let i = 1; i <= count; i++) {
-            rooms.push(String(start + i));
-        }
-        return rooms;
+        renderRoomsGrid();
     }
 
     function updateWardOccupancy() {
@@ -928,7 +1151,7 @@
             const wardAdmissions = admissions.filter(a => a.wardId === ward.id);
             ward.patients = wardAdmissions.map(a => ({
                 id: a.patientId,
-                name: patients.find(p => p.id === a.patientId)?.name || 'Unknown',
+                name: patients.find(p => p.id === a.patientId)?.name || patients.find(p => p.id === a.patientId)?.firstName + ' ' + patients.find(p => p.id === a.patientId)?.lastName || 'Unknown',
                 age: patients.find(p => p.id === a.patientId)?.age || 'N/A',
                 gender: patients.find(p => p.id === a.patientId)?.gender || 'N/A',
                 room: a.room,
@@ -936,7 +1159,8 @@
                 diagnosis: a.diagnosis
             }));
             ward.occupied = wardAdmissions.length;
-            ward.available = ward.totalBeds - ward.occupied;
+            ward.available = (ward.rooms?.length || 0) - ward.occupied;
+            ward.totalBeds = ward.rooms?.length || 0;
         });
     }
 
@@ -945,19 +1169,19 @@
         if (!grid) return;
         
         grid.innerHTML = wards.map(ward => {
-            const occupancyPercent = (ward.occupied / ward.totalBeds) * 100;
+            const occupancyPercent = ward.totalBeds > 0 ? (ward.occupied / ward.totalBeds) * 100 : 0;
             const wardClass = ward.id;
             
             return `
                 <div class="ward-card ${wardClass}">
                     <div class="ward-header">
                         <h2><i class="fas ${ward.icon}"></i> ${ward.name} Ward</h2>
-                        <span class="room-badge">Rooms ${ward.rooms && ward.rooms.length > 0 ? ward.rooms[0] + '-' + ward.rooms[ward.rooms.length-1] : 'No rooms'}</span>
+                        <span class="room-badge">${ward.totalBeds || 0} Total Rooms</span>
                     </div>
                     <div class="bed-stats">
-                        <div class="bed-stat total"><div class="number">${ward.totalBeds}</div><div class="label">Total</div></div>
-                        <div class="bed-stat available"><div class="number">${ward.available}</div><div class="label">Available</div></div>
-                        <div class="bed-stat occupied"><div class="number">${ward.occupied}</div><div class="label">Occupied</div></div>
+                        <div class="bed-stat total"><div class="number">${ward.totalBeds || 0}</div><div class="label">Total Rooms</div></div>
+                        <div class="bed-stat available"><div class="number">${ward.available || 0}</div><div class="label">Available</div></div>
+                        <div class="bed-stat occupied"><div class="number">${ward.occupied || 0}</div><div class="label">Occupied</div></div>
                     </div>
                     <div class="progress-bar"><div class="progress-fill" style="width: ${occupancyPercent}%"></div></div>
                     <h4 style="margin: 1rem 0 0.5rem;"><i class="fas fa-users"></i> Current Patients (${ward.patients?.length || 0})</h4>
@@ -985,10 +1209,232 @@
         }).join('');
     }
 
+    function renderRoomsGrid() {
+        const ward = wards.find(w => w.id === currentRoomWard);
+        if (!ward) return;
+        
+        const rooms = ward.rooms || [];
+        const occupiedRooms = admissions.filter(a => a.wardId === currentRoomWard).map(a => a.room);
+        
+        const container = document.getElementById('roomsContainer');
+        if (rooms.length === 0) {
+            container.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;"><i class="fas fa-door-open"></i><p>No rooms added yet. Use the form above to add rooms.</p></div>';
+            return;
+        }
+        
+        container.innerHTML = rooms.map(room => {
+            const isOccupied = occupiedRooms.includes(room);
+            return `
+                <div class="room-card ${isOccupied ? 'occupied' : 'available'}">
+                    <div class="room-number-display">${room}</div>
+                    <span class="room-status status-${isOccupied ? 'occupied' : 'available'}">
+                        ${isOccupied ? 'Occupied' : 'Available'}
+                    </span>
+                    <div class="room-actions">
+                        ${!isOccupied ? `<button class="room-action-btn btn-success" onclick="quickAdmitToRoom('${currentRoomWard}', '${room}')" style="background:#27ae60;color:white;"><i class="fas fa-user-plus"></i> Admit</button>` : ''}
+                        <button class="room-action-btn btn-danger" onclick="deleteRoom('${currentRoomWard}', '${room}')" style="background:#e74c3c;color:white;"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    window.selectRoomWard = function(wardId, btn) {
+        currentRoomWard = wardId;
+        document.querySelectorAll('.ward-tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderRoomsGrid();
+    };
+
+    window.addSingleRoom = async function() {
+        const roomNumber = document.getElementById('newRoomNumber').value.trim();
+        if (!roomNumber) {
+            showToast('Please enter a room number');
+            return;
+        }
+        
+        const ward = wards.find(w => w.id === currentRoomWard);
+        if (!ward) return;
+        
+        const existingRooms = ward.rooms || [];
+        if (existingRooms.includes(roomNumber)) {
+            showToast('Room number already exists in this ward');
+            return;
+        }
+        
+        const updatedRooms = [...existingRooms, roomNumber];
+        updatedRooms.sort();
+        
+        const wardRef = doc(db, "wards", ward.id);
+        await updateDoc(wardRef, {
+            rooms: updatedRooms,
+            totalBeds: updatedRooms.length
+        });
+        
+        ward.rooms = updatedRooms;
+        ward.totalBeds = updatedRooms.length;
+        ward.available = updatedRooms.length - ward.occupied;
+        
+        document.getElementById('newRoomNumber').value = '';
+        renderRoomsGrid();
+        updateWardOccupancy();
+        renderWards();
+        updateStats();
+        showToast(`✅ Room ${roomNumber} added to ${ward.name} Ward`);
+    };
+
+    window.showBulkAddModal = function() {
+        document.getElementById('bulkWard').value = currentRoomWard;
+        document.getElementById('bulkFormat').value = '';
+        document.getElementById('bulkCount').value = '5';
+        document.getElementById('bulkPreviewRooms').textContent = '-';
+        
+        document.getElementById('bulkFormat').onkeyup = updateBulkPreview;
+        document.getElementById('bulkCount').onchange = updateBulkPreview;
+        
+        document.getElementById('bulkAddModal').classList.add('active');
+    };
+
+    window.closeBulkAddModal = function() {
+        document.getElementById('bulkAddModal').classList.remove('active');
+    };
+
+    function updateBulkPreview() {
+        const format = document.getElementById('bulkFormat').value;
+        const count = parseInt(document.getElementById('bulkCount').value) || 1;
+        const wardId = document.getElementById('bulkWard').value;
+        
+        if (!format) {
+            document.getElementById('bulkPreviewRooms').textContent = 'Enter format to preview';
+            return;
+        }
+        
+        const ward = wards.find(w => w.id === wardId);
+        const existingRooms = ward?.rooms || [];
+        const preview = [];
+        
+        for (let i = 1; i <= count; i++) {
+            let newRoom = format + i;
+            if (existingRooms.includes(newRoom)) {
+                preview.push(`${newRoom} (⚠️ exists)`);
+            } else {
+                preview.push(newRoom);
+            }
+        }
+        
+        document.getElementById('bulkPreviewRooms').innerHTML = preview.join(', ');
+    }
+
+    window.bulkAddRooms = async function(event) {
+        event.preventDefault();
+        
+        const wardId = document.getElementById('bulkWard').value;
+        const format = document.getElementById('bulkFormat').value;
+        const count = parseInt(document.getElementById('bulkCount').value);
+        
+        if (!wardId || !format || !count) {
+            showToast('Please fill all fields');
+            return;
+        }
+        
+        const wardIndex = wards.findIndex(w => w.id === wardId);
+        if (wardIndex === -1) return;
+        
+        const ward = wards[wardIndex];
+        const existingRooms = ward.rooms || [];
+        const newRooms = [];
+        const addedRooms = [];
+        
+        for (let i = 1; i <= count; i++) {
+            let newRoom = format + i;
+            if (!existingRooms.includes(newRoom)) {
+                newRooms.push(newRoom);
+                addedRooms.push(newRoom);
+            }
+        }
+        
+        if (newRooms.length === 0) {
+            showToast('No new rooms were added (they might already exist)');
+            return;
+        }
+        
+        const updatedRooms = [...existingRooms, ...newRooms];
+        updatedRooms.sort();
+        
+        const wardRef = doc(db, "wards", ward.id);
+        await updateDoc(wardRef, {
+            rooms: updatedRooms,
+            totalBeds: updatedRooms.length
+        });
+        
+        wards[wardIndex].rooms = updatedRooms;
+        wards[wardIndex].totalBeds = updatedRooms.length;
+        
+        closeBulkAddModal();
+        if (currentRoomWard === wardId) {
+            renderRoomsGrid();
+        }
+        updateWardOccupancy();
+        renderWards();
+        updateStats();
+        showToast(`✅ Added ${addedRooms.length} room(s) to ${ward.name} Ward: ${addedRooms.join(', ')}`);
+    };
+
+    window.deleteRoom = async function(wardId, roomNumber) {
+        if (!confirm(`Delete room ${roomNumber}? This will not affect admitted patients but the room will no longer be available for new admissions.`)) {
+            return;
+        }
+        
+        const wardIndex = wards.findIndex(w => w.id === wardId);
+        if (wardIndex === -1) return;
+        
+        const ward = wards[wardIndex];
+        const isOccupied = admissions.some(a => a.wardId === wardId && a.room === roomNumber);
+        
+        if (isOccupied) {
+            showToast('Cannot delete an occupied room. Please discharge the patient first.');
+            return;
+        }
+        
+        const updatedRooms = (ward.rooms || []).filter(r => r !== roomNumber);
+        
+        const wardRef = doc(db, "wards", ward.id);
+        await updateDoc(wardRef, {
+            rooms: updatedRooms,
+            totalBeds: updatedRooms.length
+        });
+        
+        wards[wardIndex].rooms = updatedRooms;
+        wards[wardIndex].totalBeds = updatedRooms.length;
+        
+        if (currentRoomWard === wardId) {
+            renderRoomsGrid();
+        }
+        updateWardOccupancy();
+        renderWards();
+        updateStats();
+        showToast(`✅ Room ${roomNumber} deleted from ${ward.name} Ward`);
+    };
+
+    window.quickAdmitToRoom = function(wardId, roomNumber) {
+        document.getElementById('admitWard').value = wardId;
+        updateAvailableRooms();
+        setTimeout(() => {
+            const roomSelect = document.getElementById('admitRoom');
+            for (let i = 0; i < roomSelect.options.length; i++) {
+                if (roomSelect.options[i].value === roomNumber) {
+                    roomSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        }, 100);
+        showAdmitPatientModal(wardId);
+    };
+
     function updateStats() {
-        const totalBeds = wards.reduce((sum, w) => sum + w.totalBeds, 0);
-        const availableBeds = wards.reduce((sum, w) => sum + w.available, 0);
-        const occupiedBeds = wards.reduce((sum, w) => sum + w.occupied, 0);
+        const totalBeds = wards.reduce((sum, w) => sum + (w.totalBeds || 0), 0);
+        const availableBeds = wards.reduce((sum, w) => sum + (w.available || 0), 0);
+        const occupiedBeds = wards.reduce((sum, w) => sum + (w.occupied || 0), 0);
         const occupancyRate = totalBeds > 0 ? Math.round((occupiedBeds / totalBeds) * 100) : 0;
         
         document.getElementById('totalBeds').textContent = totalBeds;
@@ -1007,100 +1453,6 @@
         select.innerHTML = '<option value="">-- Choose a patient --</option>' +
             availablePatients.map(p => `<option value="${p.id}">${p.name || p.firstName + ' ' + p.lastName}</option>`).join('');
     }
-
-    // Room Management Functions
-    window.showAddRoomModal = function() {
-        document.getElementById('addRoomModal').classList.add('active');
-        document.getElementById('roomNumberFormat').value = '';
-        document.getElementById('numberOfRooms').value = '1';
-        document.getElementById('previewRooms').textContent = '-';
-        
-        // Add preview functionality
-        document.getElementById('roomNumberFormat').onkeyup = updateRoomPreview;
-        document.getElementById('numberOfRooms').onchange = updateRoomPreview;
-    };
-
-    window.closeAddRoomModal = function() {
-        document.getElementById('addRoomModal').classList.remove('active');
-        document.getElementById('addRoomForm').reset();
-    };
-
-    function updateRoomPreview() {
-        const format = document.getElementById('roomNumberFormat').value;
-        const count = parseInt(document.getElementById('numberOfRooms').value) || 1;
-        const wardId = document.getElementById('addRoomWard').value;
-        
-        if (!format || !wardId) {
-            document.getElementById('previewRooms').textContent = 'Select ward and enter format';
-            return;
-        }
-        
-        const ward = wards.find(w => w.id === wardId);
-        if (!ward) return;
-        
-        const existingRooms = ward.rooms || [];
-        const preview = [];
-        
-        for (let i = 1; i <= count; i++) {
-            let newRoom = format + i;
-            if (existingRooms.includes(newRoom)) {
-                preview.push(`${newRoom} (⚠️ already exists)`);
-            } else {
-                preview.push(newRoom);
-            }
-        }
-        
-        document.getElementById('previewRooms').innerHTML = preview.join(', ');
-    }
-
-window.addNewRoom = async function(event) {
-    event.preventDefault();
-    
-    const wardId = document.getElementById('addRoomWard').value;
-    const format = document.getElementById('roomNumberFormat').value;
-    const numberOfRooms = parseInt(document.getElementById('numberOfRooms').value);
-    
-    if (!wardId || !format || !numberOfRooms) {
-        showToast('Please fill all fields');
-        return;
-    }
-    
-    const wardIndex = wards.findIndex(w => w.id === wardId);
-    if (wardIndex === -1) return;
-    
-    const ward = wards[wardIndex];
-    const existingRooms = ward.rooms || [];
-    const newRooms = [];
-    const addedRooms = [];
-    
-    for (let i = 1; i <= numberOfRooms; i++) {
-        let newRoom = format + i;
-        if (!existingRooms.includes(newRoom)) {
-            newRooms.push(newRoom);
-            addedRooms.push(newRoom);
-        }
-    }
-    
-    if (newRooms.length === 0) {
-        showToast('No new rooms were added (they might already exist)');
-        return;
-    }
-    
-    const updatedRooms = [...existingRooms, ...newRooms];
-    
-    const wardRef = doc(db, "wards", ward.id);
-    await updateDoc(wardRef, {
-        rooms: updatedRooms,
-        totalBeds: updatedRooms.length
-    });
-    
-    wards[wardIndex].rooms = updatedRooms;
-    wards[wardIndex].totalBeds = updatedRooms.length;
-    
-    closeAddRoomModal();
-    await loadData();
-    showToast(`✅ Added ${addedRooms.length} room(s) to ${ward.name} Ward: ${addedRooms.join(', ')}`);
-};
 
     window.updateAvailableRooms = function() {
         const wardId = document.getElementById('admitWard').value;
@@ -1184,6 +1536,7 @@ window.addNewRoom = async function(event) {
         
         closeAdmitModal();
         await loadData();
+        renderRoomsGrid();
         showToast(`✅ ${patient.name} admitted to ${ward.name} Ward, Room ${room}`);
     };
 
@@ -1249,6 +1602,7 @@ window.addNewRoom = async function(event) {
         
         closeDischargeModal();
         await loadData();
+        renderRoomsGrid();
         showToast('✅ Patient discharged successfully');
     };
 
@@ -1358,10 +1712,11 @@ window.addNewRoom = async function(event) {
             closeAdmitModal();
             closeDischargeModal();
             closeViewPatientModal();
-            closeAddRoomModal();
+            closeBulkAddModal();
         }
     });
     
+    // Make functions globally available
     window.updateAvailableRooms = updateAvailableRooms;
     window.showAdmitPatientModal = showAdmitPatientModal;
     window.closeAdmitModal = closeAdmitModal;
@@ -1375,7 +1730,13 @@ window.addNewRoom = async function(event) {
     window.toggleProfileMenu = toggleProfileMenu;
     window.logoutUser = logoutUser;
     window.navigateTo = navigateTo;
-window.updateRoomPreview = updateRoomPreview;
+    window.selectRoomWard = selectRoomWard;
+    window.addSingleRoom = addSingleRoom;
+    window.showBulkAddModal = showBulkAddModal;
+    window.closeBulkAddModal = closeBulkAddModal;
+    window.bulkAddRooms = bulkAddRooms;
+    window.deleteRoom = deleteRoom;
+    window.quickAdmitToRoom = quickAdmitToRoom;
 </script>
 </body>
 </html>
