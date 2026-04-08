@@ -19,7 +19,6 @@
             color: #1e2a3e;
         }
 
-        /* Navbar */
         .navbar {
             background: white;
             box-shadow: 0 2px 12px rgba(0,0,0,0.05);
@@ -61,6 +60,1767 @@
             margin: 0 2rem;
         }
 
+        .search-bar {
+            background: #f1f5f9;
+            border-radius: 40px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .search-bar i {
+            color: #5a6e85;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-icon {
+            width: 42px;
+            height: 42px;
+            background: #f0f4fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav-icon:hover {
+            background: #e2e8f0;
+        }
+
+        .profile-menu {
+            position: absolute;
+            top: 75px;
+            right: 2rem;
+            background: white;
+            width: 280px;
+            border-radius: 20px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            padding: 1rem;
+            display: none;
+            z-index: 200;
+        }
+
+        .profile-menu.show {
+            display: block;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .profile-header i {
+            font-size: 2.5rem;
+            color: #2c6e9e;
+        }
+
+        .profile-name {
+            font-weight: 700;
+        }
+
+        .profile-email {
+            font-size: 0.75rem;
+            color: #5f7f9e;
+        }
+
+        .profile-menu-items a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 8px;
+            color: #1e2a3e;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: 0.1s;
+            cursor: pointer;
+        }
+
+        .profile-menu-items a:hover {
+            background: #f0f6fe;
+        }
+
+        .divider {
+            height: 1px;
+            background: #edf2f7;
+            margin: 8px 0;
+        }
+
+        .main-tabs {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 2rem;
+        }
+
+        .tabs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 1rem 0;
+            font-weight: 500;
+            color: #5a6e85;
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            color: #1e5b9e;
+            border-bottom-color: #1e5b9e;
+        }
+
+        .tab:hover:not(.active) {
+            color: #2c3e66;
+            border-bottom-color: #cbd5e1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .page-header h1 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #2c3e50;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .btn-success:hover {
+            background: #2ecc71;
+            transform: translateY(-2px);
+        }
+
+        .ward-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .ward-card {
+            background: white;
+            border-radius: 25px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ward-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .ward-card.newborn { border-top: 5px solid #3498db; }
+        .ward-card.middle { border-top: 5px solid #27ae60; }
+        .ward-card.old { border-top: 5px solid #e74c3c; }
+        
+        .ward-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .ward-header h2 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .ward-header i {
+            font-size: 1.5rem;
+        }
+        
+        .ward-card.newborn i { color: #3498db; }
+        .ward-card.middle i { color: #27ae60; }
+        .ward-card.old i { color: #e74c3c; }
+        
+        .room-badge {
+            background: #f0f0f0;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+        
+        .bed-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 20px;
+        }
+        
+        .bed-stat {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .bed-stat .number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        
+        .bed-stat .label {
+            font-size: 0.75rem;
+            color: #666;
+        }
+        
+        .bed-stat.total .number { color: #2c3e50; }
+        .bed-stat.available .number { color: #27ae60; }
+        .bed-stat.occupied .number { color: #e74c3c; }
+        
+        .progress-bar {
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #27ae60);
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+        
+        .patient-list {
+            margin-top: 1rem;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .patient-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .patient-item:hover {
+            background: #f8f9fa;
+            transform: translateX(5px);
+        }
+        
+        .patient-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .patient-info {
+            flex: 1;
+        }
+        
+        .patient-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .patient-info p {
+            font-size: 0.7rem;
+            color: #666;
+        }
+        
+        .room-number {
+            background: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .bed-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .bed-action-btn {
+            flex: 1;
+            padding: 0.7rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .bed-action-btn.admit {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .bed-action-btn.admit:hover:not(:disabled) {
+            background: #2ecc71;
+            transform: translateY(-2px);
+        }
+        
+        .bed-action-btn.discharge {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .bed-action-btn.discharge:hover:not(:disabled) {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .bed-action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .ward-summary {
+            background: white;
+            border-radius: 25px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+        
+        .summary-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 20px;
+        }
+        
+        .summary-item .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .summary-item .label {
+            color: #666;
+            font-size: 0.8rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 1.5rem;
+            color: #666;
+        }
+        
+        .room-management {
+            background: white;
+            border-radius: 25px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .room-management h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .ward-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .ward-tab-btn {
+            padding: 10px 24px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .ward-tab-btn.active {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+        
+        .room-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .room-card.available {
+            border-left: 4px solid #27ae60;
+            background: #f0fff4;
+        }
+        
+        .room-card.occupied {
+            border-left: 4px solid #e74c3c;
+            background: #fff5f5;
+            opacity: 0.7;
+        }
+        
+        .room-number-display {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .room-status {
+            font-size: 0.7rem;
+            margin-top: 0.3rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .status-available {
+            background: #27ae6020;
+            color: #27ae60;
+        }
+        
+        .status-occupied {
+            background: #e74c3c20;
+            color: #e74c3c;
+        }
+        
+        .room-actions {
+            margin-top: 0.5rem;
+            display: flex;
+            gap: 0.3rem;
+            justify-content: center;
+        }
+        
+        .room-action-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+        
+        .add-room-form {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+        
+        .add-room-form .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .add-room-form label {
+            font-size: 0.75rem;
+            margin-bottom: 0.2rem;
+            display: block;
+        }
+        
+        .add-room-form input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+        }
+
+        .modal-header h2 {
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 0.85rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 2rem;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            padding: 1.5rem 2rem;
+            border-top: 2px solid #f0f0f0;
+            background: #fafafa;
+        }
+
+        .detail-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .detail-section h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .detail-item {
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .detail-label {
+            display: block;
+            font-size: 0.7rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+        
+        .detail-value {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #1e293b;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 40px;
+            z-index: 1000;
+            opacity: 0;
+            transition: 0.2s;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            .tabs-container {
+                gap: 1rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+            .ward-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .header-buttons {
+                flex-direction: column;
+            }
+            .rooms-grid {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-container">
+        <div class="logo" onclick="navigateTo('home.html')">
+            <i class="fas fa-hospital-alt"></i> TOJI-KAN
+        </div>
+        <div class="nav-center">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="wardSearch" placeholder="Search patients..." onkeyup="searchWardPatients()">
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-icon profile-icon" onclick="toggleProfileMenu()">
+                <i class="far fa-user-circle"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="profile-menu" id="profileMenu">
+        <div class="profile-header">
+            <i class="fas fa-user-md"></i>
+            <div>
+                <div class="profile-name" id="profileName">Loading...</div>
+                <div class="profile-email" id="profileEmail">Loading...</div>
+            </div>
+        </div>
+        <div class="profile-menu-items">
+            <a onclick="showToast('Profile section coming soon')"><i class="fas fa-user"></i> My Profile</a>
+            <div class="divider"></div>
+            <a onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+</div>
+
+<div class="main-tabs">
+    <div class="tabs-container">
+        <div class="tab" onclick="navigateTo('home.html')"><i class="fas fa-chart-pie"></i> Dashboard</div>
+        <div class="tab" onclick="navigateTo('patients.html')"><i class="fas fa-users"></i> Patients</div>
+        <div class="tab" onclick="navigateTo('staff.html')"><i class="fas fa-user-md"></i> Staff</div>
+        <div class="tab active" onclick="navigateTo('wards.html')"><i class="fas fa-procedures"></i> Wards</div>
+        <div class="tab" onclick="navigateTo('appointments.html')"><i class="fas fa-calendar-check"></i> Appointments</div>
+        <div class="tab" onclick="navigateTo('billing.html')"><i class="fas fa-file-invoice-dollar"></i> Billing</div>
+    </div>
+</div>
+
+<main class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-procedures"></i> Ward Management</h1>
+        <div class="header-buttons">
+            <button class="btn-primary" onclick="showAdmitPatientModal()">
+                <i class="fas fa-user-plus"></i> Admit Patient
+            </button>
+        </div>
+    </div>
+
+    <div class="ward-summary" id="wardSummary">
+        <div class="summary-item"><div class="value" id="totalBeds">0</div><div class="label">Total Rooms</div></div>
+        <div class="summary-item"><div class="value" id="availableBeds">0</div><div class="label">Available Rooms</div></div>
+        <div class="summary-item"><div class="value" id="occupiedBeds">0</div><div class="label">Occupied Rooms</div></div>
+        <div class="summary-item"><div class="value" id="occupancyRate">0%</div><div class="label">Occupancy Rate</div></div>
+    </div>
+
+    <!-- Room Management Section -->
+    <div class="room-management">
+        <h2><i class="fas fa-door-open"></i> Room Management</h2>
+        
+        <div class="ward-tabs" id="roomWardTabs">
+            <button class="ward-tab-btn active" data-ward="newborn" onclick="selectRoomWard('newborn')">👶 New Born Ward</button>
+            <button class="ward-tab-btn" data-ward="middle" onclick="selectRoomWard('middle')">👨 Middle Age Ward</button>
+            <button class="ward-tab-btn" data-ward="old" onclick="selectRoomWard('old')">👴 Old Age Ward</button>
+        </div>
+        
+        <div id="roomsContainer" class="rooms-grid">
+            <div class="empty-state">Loading rooms...</div>
+        </div>
+        
+        <div class="add-room-form">
+            <div class="form-group" style="flex: 2;">
+                <label>Room Number</label>
+                <input type="text" id="newRoomNumber" placeholder="e.g., 101, A1, 201B">
+            </div>
+            <button class="btn-success" onclick="addSingleRoom()">
+                <i class="fas fa-plus"></i> Add Room
+            </button>
+            <button class="btn-primary" onclick="showBulkAddModal()">
+                <i class="fas fa-layer-group"></i> Bulk Add
+            </button>
+        </div>
+    </div>
+
+    <div class="ward-grid" id="wardGrid"></div>
+</main>
+
+<!-- Bulk Add Rooms Modal -->
+<div class="modal" id="bulkAddModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-layer-group"></i> Bulk Add Rooms</h2>
+            <button class="close-btn" onclick="closeBulkAddModal()">&times;</button>
+        </div>
+        <form id="bulkAddForm" onsubmit="bulkAddRooms(event)">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>Select Ward *</label>
+                    <select id="bulkWard" required onchange="updateBulkPreview()">
+                        <option value="newborn">New Born Ward</option>
+                        <option value="middle">Middle Age Ward</option>
+                        <option value="old">Old Age Ward</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <label>Room Number Format *</label>
+                    <input type="text" id="bulkFormat" placeholder="e.g., 1, A, 200" required onkeyup="updateBulkPreview()">
+                    <small>Rooms will be: Format + number (e.g., 1 → 11, 12; A → A1, A2)</small>
+                </div>
+                <div class="form-group full-width">
+                    <label>Number of Rooms to Add *</label>
+                    <input type="number" id="bulkCount" min="1" max="30" value="5" required onchange="updateBulkPreview()">
+                </div>
+                <div class="form-group full-width">
+                    <div id="bulkPreview" style="background: #f8f9fa; padding: 1rem; border-radius: 12px;">
+                        <strong>Preview:</strong> <span id="bulkPreviewRooms">-</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" onclick="closeBulkAddModal()">Cancel</button>
+                <button type="submit" class="btn-primary">Add Rooms</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Admit Patient Modal -->
+<div class="modal" id="admitModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-user-plus"></i> Admit Patient</h2>
+            <button class="close-btn" onclick="closeAdmitModal()">&times;</button>
+        </div>
+        <form id="admitForm" onsubmit="admitPatient(event)">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>Select Patient *</label>
+                    <select id="admitPatientId" required></select>
+                </div>
+                <div class="form-group">
+                    <label>Select Ward *</label>
+                    <select id="admitWard" required onchange="updateAvailableRooms()">
+                        <option value="">-- Choose ward --</option>
+                        <option value="newborn">New Born Ward</option>
+                        <option value="middle">Middle Age Ward</option>
+                        <option value="old">Old Age Ward</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Room Number *</label>
+                    <select id="admitRoom" required></select>
+                </div>
+                <div class="form-group">
+                    <label>Admission Date</label>
+                    <input type="date" id="admitDate">
+                </div>
+                <div class="form-group full-width">
+                    <label>Diagnosis / Reason</label>
+                    <textarea id="admitDiagnosis" rows="2" placeholder="Enter diagnosis"></textarea>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" onclick="closeAdmitModal()">Cancel</button>
+                <button type="submit" class="btn-primary">Admit Patient</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Discharge Patient Modal -->
+<div class="modal" id="dischargeModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-user-check"></i> Discharge Patient</h2>
+            <button class="close-btn" onclick="closeDischargeModal()">&times;</button>
+        </div>
+        <div id="dischargeDetails" style="padding: 1rem 2rem 0;"></div>
+        <form id="dischargeForm" onsubmit="dischargePatient(event)" style="padding: 0 2rem 2rem;">
+            <input type="hidden" id="dischargePatientId">
+            <input type="hidden" id="dischargeWardId">
+            <input type="hidden" id="dischargeRoom">
+            <div class="form-group">
+                <label>Discharge Date</label>
+                <input type="date" id="dischargeDate">
+            </div>
+            <div class="form-group">
+                <label>Discharge Notes</label>
+                <textarea id="dischargeNotes" rows="3" placeholder="Enter discharge summary"></textarea>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" onclick="closeDischargeModal()">Cancel</button>
+                <button type="submit" class="btn-primary" style="background: #e74c3c;">Confirm Discharge</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- View Patient Modal -->
+<div class="modal" id="viewPatientModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-user-md"></i> Patient Details</h2>
+            <button class="close-btn" onclick="closeViewPatientModal()">&times;</button>
+        </div>
+        <div id="wardPatientDetails" style="padding: 2rem;"></div>
+        <div class="form-actions">
+            <button class="btn-secondary" onclick="closeViewPatientModal()">Close</button>
+            <button class="btn-primary" style="background: #e74c3c;" id="dischargeFromViewBtn">Discharge Patient</button>
+        </div>
+    </div>
+</div>
+
+<div id="toastMsg" class="toast-msg"></div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCCkkqW21TMAy4NSA217k_fovsdavkF06s",
+        authDomain: "tojikan-hospital.firebaseapp.com",
+        projectId: "tojikan-hospital",
+        storageBucket: "tojikan-hospital.firebasestorage.app",
+        messagingSenderId: "1065678945107",
+        appId: "1:1065678945107:web:cd95704090e3306b5ebfa6",
+        measurementId: "G-MJ1SSXKFWQ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let wards = [];
+    let patients = [];
+    let admissions = [];
+    let currentPatient = null;
+    let currentRoomWard = 'newborn';
+
+    // Helper Functions
+    function showToast(msg) {
+        const toast = document.getElementById('toastMsg');
+        toast.textContent = msg;
+        toast.style.opacity = "1";
+        setTimeout(() => toast.style.opacity = "0", 2500);
+    }
+
+    function navigateTo(page) {
+        window.location.href = page;
+    }
+
+    // Load all data from Firebase
+    async function loadData() {
+        try {
+            // Load patients
+            const patientsSnap = await getDocs(collection(db, "patients"));
+            patients = patientsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            
+            // Load active admissions
+            const admissionsSnap = await getDocs(query(collection(db, "admissions"), where("status", "==", "active")));
+            admissions = admissionsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            
+            // Load wards
+            const wardsSnap = await getDocs(collection(db, "wards"));
+            if (wardsSnap.empty) {
+                // Create default wards
+                const defaultWards = [
+                    { id: "newborn", name: "New Born", icon: "fa-baby", rooms: [], totalBeds: 0 },
+                    { id: "middle", name: "Middle Age", icon: "fa-user", rooms: [], totalBeds: 0 },
+                    { id: "old", name: "Old Age", icon: "fa-user-plus", rooms: [], totalBeds: 0 }
+                ];
+                for (const ward of defaultWards) {
+                    const docRef = await addDoc(collection(db, "wards"), ward);
+                    wards.push({ id: docRef.id, ...ward });
+                }
+            } else {
+                wards = wardsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            }
+            
+            updateWardOccupancy();
+            renderWards();
+            updateStats();
+            loadPatientSelect();
+            renderRoomsGrid();
+        } catch (error) {
+            console.error("Error loading data:", error);
+            showToast("Error loading data");
+        }
+    }
+
+    function updateWardOccupancy() {
+        wards.forEach(ward => {
+            const wardAdmissions = admissions.filter(a => a.wardId === ward.id);
+            ward.patients = wardAdmissions.map(a => {
+                const patient = patients.find(p => p.id === a.patientId);
+                return {
+                    id: a.patientId,
+                    name: patient?.name || patient?.firstName + ' ' + patient?.lastName || 'Unknown',
+                    age: patient?.age || 'N/A',
+                    gender: patient?.gender || 'N/A',
+                    room: a.room,
+                    admitDate: a.admitDate,
+                    diagnosis: a.diagnosis
+                };
+            });
+            ward.occupied = wardAdmissions.length;
+            ward.totalBeds = ward.rooms?.length || 0;
+            ward.available = ward.totalBeds - ward.occupied;
+        });
+    }
+
+    function renderWards() {
+        const grid = document.getElementById('wardGrid');
+        if (!grid) return;
+        
+        grid.innerHTML = wards.map(ward => {
+            const occupancyPercent = ward.totalBeds > 0 ? (ward.occupied / ward.totalBeds) * 100 : 0;
+            const wardClass = ward.id;
+            
+            return `
+                <div class="ward-card ${wardClass}">
+                    <div class="ward-header">
+                        <h2><i class="fas ${ward.icon}"></i> ${ward.name} Ward</h2>
+                        <span class="room-badge">${ward.totalBeds || 0} Total Rooms</span>
+                    </div>
+                    <div class="bed-stats">
+                        <div class="bed-stat total"><div class="number">${ward.totalBeds || 0}</div><div class="label">Total Rooms</div></div>
+                        <div class="bed-stat available"><div class="number">${ward.available || 0}</div><div class="label">Available</div></div>
+                        <div class="bed-stat occupied"><div class="number">${ward.occupied || 0}</div><div class="label">Occupied</div></div>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${occupancyPercent}%"></div></div>
+                    <h4 style="margin: 1rem 0 0.5rem;"><i class="fas fa-users"></i> Current Patients (${ward.patients?.length || 0})</h4>
+                    <div class="patient-list" id="patient-list-${ward.id}">
+                        ${ward.patients && ward.patients.length > 0 ? ward.patients.map(p => `
+                            <div class="patient-item" onclick="viewWardPatient('${p.id}', '${ward.id}')">
+                                <div class="patient-avatar"><i class="fas ${p.gender === 'Male' ? 'fa-mars' : 'fa-venus'}"></i></div>
+                                <div class="patient-info"><h4>${p.name}</h4><p>Room ${p.room} • Admitted: ${p.admitDate}</p></div>
+                                <div class="room-number">Room ${p.room}</div>
+                            </div>
+                        `).join('') : '<div class="empty-state"><i class="fas fa-bed"></i><p>No patients currently</p></div>'}
+                    </div>
+                    <div class="bed-actions">
+                        <button class="bed-action-btn admit" onclick="showAdmitPatientModal('${ward.id}')" ${ward.available === 0 ? 'disabled' : ''}>
+                            <i class="fas fa-user-plus"></i> Admit
+                        </button>
+                        ${ward.occupied > 0 ? `
+                            <button class="bed-action-btn discharge" onclick="showDischargeFromWard('${ward.id}')">
+                                <i class="fas fa-user-check"></i> Discharge
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function renderRoomsGrid() {
+        const ward = wards.find(w => w.id === currentRoomWard);
+        if (!ward) {
+            document.getElementById('roomsContainer').innerHTML = '<div class="empty-state">Ward not found</div>';
+            return;
+        }
+        
+        const rooms = ward.rooms || [];
+        const occupiedRooms = admissions.filter(a => a.wardId === currentRoomWard).map(a => a.room);
+        
+        const container = document.getElementById('roomsContainer');
+        if (rooms.length === 0) {
+            container.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;"><i class="fas fa-door-open"></i><p>No rooms added yet. Use the form above to add rooms.</p></div>';
+            return;
+        }
+        
+        container.innerHTML = rooms.map(room => {
+            const isOccupied = occupiedRooms.includes(room);
+            return `
+                <div class="room-card ${isOccupied ? 'occupied' : 'available'}">
+                    <div class="room-number-display">${room}</div>
+                    <span class="room-status status-${isOccupied ? 'occupied' : 'available'}">
+                        ${isOccupied ? 'Occupied' : 'Available'}
+                    </span>
+                    <div class="room-actions">
+                        ${!isOccupied ? `<button class="room-action-btn btn-success" onclick="quickAdmitToRoom('${currentRoomWard}', '${room}')" style="background:#27ae60;color:white;"><i class="fas fa-user-plus"></i> Admit</button>` : ''}
+                        <button class="room-action-btn btn-danger" onclick="deleteRoom('${currentRoomWard}', '${room}')" style="background:#e74c3c;color:white;"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function updateStats() {
+        const totalBeds = wards.reduce((sum, w) => sum + (w.totalBeds || 0), 0);
+        const availableBeds = wards.reduce((sum, w) => sum + (w.available || 0), 0);
+        const occupiedBeds = wards.reduce((sum, w) => sum + (w.occupied || 0), 0);
+        const occupancyRate = totalBeds > 0 ? Math.round((occupiedBeds / totalBeds) * 100) : 0;
+        
+        document.getElementById('totalBeds').textContent = totalBeds;
+        document.getElementById('availableBeds').textContent = availableBeds;
+        document.getElementById('occupiedBeds').textContent = occupiedBeds;
+        document.getElementById('occupancyRate').textContent = occupancyRate + '%';
+    }
+
+    function loadPatientSelect() {
+        const select = document.getElementById('admitPatientId');
+        if (!select) return;
+        
+        const admittedPatientIds = admissions.map(a => a.patientId);
+        const availablePatients = patients.filter(p => !admittedPatientIds.includes(p.id));
+        
+        if (availablePatients.length === 0) {
+            select.innerHTML = '<option value="">-- No patients available for admission --</option>';
+        } else {
+            select.innerHTML = '<option value="">-- Choose a patient --</option>' +
+                availablePatients.map(p => `<option value="${p.id}">${p.name || p.firstName + ' ' + p.lastName}</option>`).join('');
+        }
+    }
+
+    // Room Management Functions
+    window.selectRoomWard = function(wardId) {
+        currentRoomWard = wardId;
+        document.querySelectorAll('.ward-tab-btn').forEach(btn => {
+            if (btn.getAttribute('data-ward') === wardId) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        renderRoomsGrid();
+    };
+
+    window.addSingleRoom = async function() {
+        const roomNumber = document.getElementById('newRoomNumber').value.trim();
+        if (!roomNumber) {
+            showToast('Please enter a room number');
+            return;
+        }
+        
+        const ward = wards.find(w => w.id === currentRoomWard);
+        if (!ward) {
+            showToast('Ward not found');
+            return;
+        }
+        
+        const existingRooms = ward.rooms || [];
+        if (existingRooms.includes(roomNumber)) {
+            showToast('Room number already exists in this ward');
+            return;
+        }
+        
+        const updatedRooms = [...existingRooms, roomNumber];
+        updatedRooms.sort((a, b) => {
+            // Sort numerically if both are numbers, otherwise alphabetically
+            if (!isNaN(a) && !isNaN(b)) return parseInt(a) - parseInt(b);
+            return a.localeCompare(b);
+        });
+        
+        try {
+            const wardRef = doc(db, "wards", ward.id);
+            await updateDoc(wardRef, {
+                rooms: updatedRooms,
+                totalBeds: updatedRooms.length
+            });
+            
+            // Update local array
+            ward.rooms = updatedRooms;
+            ward.totalBeds = updatedRooms.length;
+            ward.available = updatedRooms.length - ward.occupied;
+            
+            // Clear input
+            document.getElementById('newRoomNumber').value = '';
+            
+            // Refresh all displays
+            renderRoomsGrid();
+            updateWardOccupancy();
+            renderWards();
+            updateStats();
+            
+            showToast(`✅ Room ${roomNumber} added to ${ward.name} Ward`);
+        } catch (error) {
+            console.error("Error adding room:", error);
+            showToast("Error adding room");
+        }
+    };
+
+    window.showBulkAddModal = function() {
+        document.getElementById('bulkWard').value = currentRoomWard;
+        document.getElementById('bulkFormat').value = '';
+        document.getElementById('bulkCount').value = '5';
+        document.getElementById('bulkPreviewRooms').innerHTML = '-';
+        document.getElementById('bulkAddModal').classList.add('active');
+        updateBulkPreview();
+    };
+
+    window.closeBulkAddModal = function() {
+        document.getElementById('bulkAddModal').classList.remove('active');
+        document.getElementById('bulkAddForm').reset();
+    };
+
+    window.updateBulkPreview = function() {
+        const format = document.getElementById('bulkFormat').value;
+        const count = parseInt(document.getElementById('bulkCount').value) || 1;
+        const wardId = document.getElementById('bulkWard').value;
+        
+        if (!format) {
+            document.getElementById('bulkPreviewRooms').innerHTML = 'Enter format to preview';
+            return;
+        }
+        
+        const ward = wards.find(w => w.id === wardId);
+        const existingRooms = ward?.rooms || [];
+        const preview = [];
+        
+        for (let i = 1; i <= count; i++) {
+            let newRoom = format + i;
+            if (existingRooms.includes(newRoom)) {
+                preview.push(`${newRoom} (⚠️ exists)`);
+            } else {
+                preview.push(newRoom);
+            }
+        }
+        
+        document.getElementById('bulkPreviewRooms').innerHTML = preview.join(', ');
+    };
+
+    window.bulkAddRooms = async function(event) {
+        event.preventDefault();
+        
+        const wardId = document.getElementById('bulkWard').value;
+        const format = document.getElementById('bulkFormat').value;
+        const count = parseInt(document.getElementById('bulkCount').value);
+        
+        if (!wardId || !format || !count) {
+            showToast('Please fill all fields');
+            return;
+        }
+        
+        const wardIndex = wards.findIndex(w => w.id === wardId);
+        if (wardIndex === -1) return;
+        
+        const ward = wards[wardIndex];
+        const existingRooms = ward.rooms || [];
+        const newRooms = [];
+        const addedRooms = [];
+        
+        for (let i = 1; i <= count; i++) {
+            let newRoom = format + i;
+            if (!existingRooms.includes(newRoom)) {
+                newRooms.push(newRoom);
+                addedRooms.push(newRoom);
+            }
+        }
+        
+        if (newRooms.length === 0) {
+            showToast('No new rooms were added (they might already exist)');
+            return;
+        }
+        
+        const updatedRooms = [...existingRooms, ...newRooms];
+        updatedRooms.sort((a, b) => {
+            if (!isNaN(a) && !isNaN(b)) return parseInt(a) - parseInt(b);
+            return a.localeCompare(b);
+        });
+        
+        try {
+            const wardRef = doc(db, "wards", ward.id);
+            await updateDoc(wardRef, {
+                rooms: updatedRooms,
+                totalBeds: updatedRooms.length
+            });
+            
+            // Update local array
+            wards[wardIndex].rooms = updatedRooms;
+            wards[wardIndex].totalBeds = updatedRooms.length;
+            wards[wardIndex].available = updatedRooms.length - wards[wardIndex].occupied;
+            
+            // Close modal
+            closeBulkAddModal();
+            
+            // Refresh displays
+            if (currentRoomWard === wardId) {
+                renderRoomsGrid();
+            }
+            updateWardOccupancy();
+            renderWards();
+            updateStats();
+            
+            showToast(`✅ Added ${addedRooms.length} room(s) to ${ward.name} Ward: ${addedRooms.join(', ')}`);
+        } catch (error) {
+            console.error("Error bulk adding rooms:", error);
+            showToast("Error adding rooms");
+        }
+    };
+
+    window.deleteRoom = async function(wardId, roomNumber) {
+        if (!confirm(`Delete room ${roomNumber}? This will not affect admitted patients but the room will no longer be available for new admissions.`)) {
+            return;
+        }
+        
+        const wardIndex = wards.findIndex(w => w.id === wardId);
+        if (wardIndex === -1) return;
+        
+        const ward = wards[wardIndex];
+        const isOccupied = admissions.some(a => a.wardId === wardId && a.room === roomNumber);
+        
+        if (isOccupied) {
+            showToast('Cannot delete an occupied room. Please discharge the patient first.');
+            return;
+        }
+        
+        const updatedRooms = (ward.rooms || []).filter(r => r !== roomNumber);
+        
+        try {
+            const wardRef = doc(db, "wards", ward.id);
+            await updateDoc(wardRef, {
+                rooms: updatedRooms,
+                totalBeds: updatedRooms.length
+            });
+            
+            wards[wardIndex].rooms = updatedRooms;
+            wards[wardIndex].totalBeds = updatedRooms.length;
+            wards[wardIndex].available = updatedRooms.length - wards[wardIndex].occupied;
+            
+            if (currentRoomWard === wardId) {
+                renderRoomsGrid();
+            }
+            updateWardOccupancy();
+            renderWards();
+            updateStats();
+            
+            showToast(`✅ Room ${roomNumber} deleted from ${ward.name} Ward`);
+        } catch (error) {
+            console.error("Error deleting room:", error);
+            showToast("Error deleting room");
+        }
+    };
+
+    window.quickAdmitToRoom = function(wardId, roomNumber) {
+        document.getElementById('admitWard').value = wardId;
+        updateAvailableRooms();
+        setTimeout(() => {
+            const roomSelect = document.getElementById('admitRoom');
+            for (let i = 0; i < roomSelect.options.length; i++) {
+                if (roomSelect.options[i].value === roomNumber) {
+                    roomSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        }, 100);
+        showAdmitPatientModal(wardId);
+    };
+
+    // Admission Functions
+    window.updateAvailableRooms = function() {
+        const wardId = document.getElementById('admitWard').value;
+        const roomSelect = document.getElementById('admitRoom');
+        
+        if (!wardId) {
+            roomSelect.innerHTML = '<option value="">-- Choose ward first --</option>';
+            return;
+        }
+        
+        const ward = wards.find(w => w.id === wardId);
+        if (!ward) {
+            roomSelect.innerHTML = '<option value="">-- Ward not found --</option>';
+            return;
+        }
+        
+        if (!ward.rooms || ward.rooms.length === 0) {
+            roomSelect.innerHTML = '<option value="">-- No rooms available, please add rooms first --</option>';
+            return;
+        }
+        
+        const occupiedRooms = admissions.filter(a => a.wardId === wardId).map(a => a.room);
+        const availableRooms = ward.rooms.filter(room => !occupiedRooms.includes(room));
+        
+        if (availableRooms.length === 0) {
+            roomSelect.innerHTML = '<option value="">-- No available rooms --</option>';
+        } else {
+            roomSelect.innerHTML = '<option value="">-- Select a room --</option>' +
+                availableRooms.map(room => `<option value="${room}">Room ${room}</option>`).join('');
+        }
+    };
+
+    window.showAdmitPatientModal = function(preSelectedWard = null) {
+        loadPatientSelect();
+        if (preSelectedWard) {
+            document.getElementById('admitWard').value = preSelectedWard;
+            updateAvailableRooms();
+        }
+        document.getElementById('admitDate').value = new Date().toISOString().split('T')[0];
+        document.getElementById('admitModal').classList.add('active');
+    };
+
+    window.closeAdmitModal = function() {
+        document.getElementById('admitModal').classList.remove('active');
+        document.getElementById('admitForm').reset();
+    };
+
+    window.admitPatient = async function(event) {
+        event.preventDefault();
+        
+        const patientId = document.getElementById('admitPatientId').value;
+        const wardId = document.getElementById('admitWard').value;
+        const room = document.getElementById('admitRoom').value;
+        const admitDate = document.getElementById('admitDate').value || new Date().toISOString().split('T')[0];
+        const diagnosis = document.getElementById('admitDiagnosis').value;
+        
+        if (!patientId || !wardId || !room) {
+            showToast('Please select patient, ward, and room');
+            return;
+        }
+        
+        const patient = patients.find(p => p.id === patientId);
+        const ward = wards.find(w => w.id === wardId);
+        
+        if (!patient || !ward) return;
+        
+        const admission = {
+            patientId: patientId,
+            patientName: patient.name || patient.firstName + ' ' + patient.lastName,
+            wardId: wardId,
+            wardName: ward.name,
+            room: room,
+            admitDate: admitDate,
+            diagnosis: diagnosis || 'Not specified',
+            status: 'active',
+            createdAt: new Date().toISOString()
+        };
+        
+        try {
+            await addDoc(collection(db, "admissions"), admission);
+            admissions.push(admission);
+            
+            closeAdmitModal();
+            await loadData();
+            showToast(`✅ ${patient.name} admitted to ${ward.name} Ward, Room ${room}`);
+        } catch (error) {
+            console.error("Error admitting patient:", error);
+            showToast("Error admitting patient");
+        }
+    };
+
+    window.showDischargeFromWard = function(wardId) {
+        const ward = wards.find(w => w.id === wardId);
+        if (!ward || !ward.patients || ward.patients.length === 0) return;
+        
+        let patientList = 'Select patient to discharge:\n';
+        ward.patients.forEach((p, index) => {
+            patientList += `${index + 1}. ${p.name} - Room ${p.room}\n`;
+        });
+        
+        const choice = prompt(patientList + '\nEnter patient number:');
+        if (!choice) return;
+        
+        const index = parseInt(choice) - 1;
+        if (index >= 0 && index < ward.patients.length) {
+            const patient = ward.patients[index];
+            prepareDischargePatient(patient, ward);
+        }
+    };
+
+    function prepareDischargePatient(patient, ward) {
+        document.getElementById('dischargePatientId').value = patient.id;
+        document.getElementById('dischargeWardId').value = ward.id;
+        document.getElementById('dischargeRoom').value = patient.room;
+        document.getElementById('dischargeDate').value = new Date().toISOString().split('T')[0];
+        
+        document.getElementById('dischargeDetails').innerHTML = `
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 15px; margin-bottom: 1rem;">
+                <h4 style="margin-bottom: 0.5rem;">Patient: ${patient.name}</h4>
+                <p>Ward: ${ward.name}</p>
+                <p>Room: ${patient.room}</p>
+                <p>Admitted: ${patient.admitDate}</p>
+            </div>
+        `;
+        
+        document.getElementById('dischargeModal').classList.add('active');
+    }
+
+    window.dischargePatient = async function(event) {
+        event.preventDefault();
+        
+        const patientId = document.getElementById('dischargePatientId').value;
+        const wardId = document.getElementById('dischargeWardId').value;
+        const room = document.getElementById('dischargeRoom').value;
+        const dischargeDate = document.getElementById('dischargeDate').value;
+        const notes = document.getElementById('dischargeNotes').value;
+        
+        const admission = admissions.find(a => a.patientId === patientId && a.wardId === wardId && a.room === room && a.status === 'active');
+        
+        if (admission) {
+            try {
+                const admissionRef = doc(db, "admissions", admission.id);
+                await updateDoc(admissionRef, {
+                    status: 'discharged',
+                    dischargeDate: dischargeDate,
+                    dischargeNotes: notes,
+                    updatedAt: new Date().toISOString()
+                });
+                
+                admissions = admissions.filter(a => a.id !== admission.id);
+            } catch (error) {
+                console.error("Error discharging patient:", error);
+                showToast("Error discharging patient");
+                return;
+            }
+        }
+        
+        closeDischargeModal();
+        await loadData();
+        showToast('✅ Patient discharged successfully');
+    };
+
+    window.closeDischargeModal = function() {
+        document.getElementById('dischargeModal').classList.remove('active');
+        document.getElementById('dischargeForm').reset();
+    };
+
+    window.viewWardPatient = async function(patientId, wardId) {
+        const ward = wards.find(w => w.id === wardId);
+        const patient = ward?.patients?.find(p => p.id === patientId);
+        const fullPatient = patients.find(p => p.id === patientId);
+        
+        if (!patient) return;
+        currentPatient = { patient, ward };
+        
+        document.getElementById('wardPatientDetails').innerHTML = `
+            <div class="detail-section">
+                <h3><i class="fas fa-user-circle"></i> Patient Information</h3>
+                <div class="detail-grid">
+                    <div class="detail-item"><span class="detail-label">Full Name</span><span class="detail-value">${patient.name}</span></div>
+                    <div class="detail-item"><span class="detail-label">Age</span><span class="detail-value">${patient.age} years</span></div>
+                    <div class="detail-item"><span class="detail-label">Gender</span><span class="detail-value">${patient.gender === 'Male' ? 'Male' : 'Female'}</span></div>
+                    <div class="detail-item"><span class="detail-label">Contact</span><span class="detail-value">${fullPatient?.phone || 'N/A'}</span></div>
+                </div>
+            </div>
+            <div class="detail-section">
+                <h3><i class="fas fa-procedures"></i> Admission Details</h3>
+                <div class="detail-grid">
+                    <div class="detail-item"><span class="detail-label">Ward</span><span class="detail-value">${ward.name}</span></div>
+                    <div class="detail-item"><span class="detail-label">Room</span><span class="detail-value">${patient.room}</span></div>
+                    <div class="detail-item"><span class="detail-label">Admit Date</span><span class="detail-value">${patient.admitDate}</span></div>
+                    <div class="detail-item"><span class="detail-label">Diagnosis</span><span class="detail-value">${patient.diagnosis || 'Not specified'}</span></div>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('viewPatientModal').classList.add('active');
+    };
+
+    window.closeViewPatientModal = function() {
+        document.getElementById('viewPatientModal').classList.remove('active');
+        currentPatient = null;
+    };
+
+    document.getElementById('dischargeFromViewBtn').onclick = function() {
+        if (currentPatient) {
+            closeViewPatientModal();
+            prepareDischargePatient(currentPatient.patient, currentPatient.ward);
+        }
+    };
+
+    window.searchWardPatients = function() {
+        const searchTerm = document.getElementById('wardSearch')?.value.toLowerCase() || '';
+        
+        wards.forEach(ward => {
+            const patientList = document.getElementById(`patient-list-${ward.id}`);
+            if (patientList && ward.patients) {
+                const filteredPatients = ward.patients.filter(p => p.name.toLowerCase().includes(searchTerm));
+                if (searchTerm.length < 2) {
+                    renderWards();
+                } else if (filteredPatients.length > 0) {
+                    patientList.innerHTML = filteredPatients.map(p => `
+                        <div class="patient-item" onclick="viewWardPatient('${p.id}', '${ward.id}')">
+                            <div class="patient-avatar"><i class="fas ${p.gender === 'Male' ? 'fa-mars' : 'fa-venus'}"></i></div>
+                            <div class="patient-info"><h4>${p.name}</h4><p>Room ${p.room}</p></div>
+                            <div class="room-number">Room ${p.room}</div>
+                        </div>
+                    `).join('');
+                } else {
+                    patientList.innerHTML = '<div class="empty-state">No matching patients</div>';
+                }
+            }
+        });
+    };
+
+    // Profile Functions
+    window.toggleProfileMenu = function() {
+        document.getElementById('profileMenu').classList.toggle('show');
+    };
+
+    window.logoutUser = async function() {
+        if (confirm('Are you sure you want to logout?')) {
+            await signOut(auth);
+            sessionStorage.removeItem('togikan_currentUser');
+            window.location.href = 'index.html';
+        }
+    };
+
+    function updateUserProfile(user) {
+        document.getElementById('profileName').textContent = user.displayName || user.email.split('@')[0];
+        document.getElementById('profileEmail').textContent = user.email;
+    }
+
+    // Make all functions globally available
+    window.navigateTo = navigateTo;
+    window.showToast = showToast;
+    window.searchWardPatients = searchWardPatients;
+    window.toggleProfileMenu = toggleProfileMenu;
+    window.logoutUser = logoutUser;
+    window.showAdmitPatientModal = showAdmitPatientModal;
+    window.closeAdmitModal = closeAdmitModal;
+    window.admitPatient = admitPatient;
+    window.updateAvailableRooms = updateAvailableRooms;
+    window.showDischargeFromWard = showDischargeFromWard;
+    window.dischargePatient = dischargePatient;
+    window.closeDischargeModal = closeDischargeModal;
+    window.viewWardPatient = viewWardPatient;
+    window.closeViewPatientModal = closeViewPatientModal;
+    window.selectRoomWard = selectRoomWard;
+    window.addSingleRoom = addSingleRoom;
+    window.showBulkAddModal = showBulkAddModal;
+    window.closeBulkAddModal = closeBulkAddModal;
+    window.bulkAddRooms = bulkAddRooms;
+    window.deleteRoom = deleteRoom;
+    window.quickAdmitToRoom = quickAdmitToRoom;
+    window.updateBulkPreview = updateBulkPreview;
+
+    // Auth state listener
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            window.location.href = 'index.html';
+        } else {
+            updateUserProfile(user);
+            loadData();
+        }
+    });
+
+    // Close modals when clicking outside
+    document.addEventListener('click', (e) => {
+        const menu = document.getElementById('profileMenu');
+        if (menu && !e.target.closest('.profile-icon') && !e.target.closest('#profileMenu')) {
+            menu.classList.remove('show');
+        }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeAdmitModal();
+            closeDischargeModal();
+            closeViewPatientModal();
+            closeBulkAddModal();
+        }
+    });
+</script>
+</body>
+</html>
         .search-bar {
             background: #f1f5f9;
             border-radius: 40px;
